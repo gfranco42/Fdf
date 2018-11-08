@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/08 19:31:39 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/08 19:35:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	trace(t_pos pos, t_mlx *mlx, int color)
 	e = abs(pos.x2 - pos.x1);
 	dx = 2 * e;
 	dy = 2 * abs(pos.y2 - pos.y1);
+
+/*		REGARDER VIDEO 49-50 min https://www.youtube.com/watch?v=nQbnYl7xgb8*/
 
 	while (pos.x1 <= pos.x2)
 	{
