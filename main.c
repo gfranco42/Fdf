@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/06 17:54:24 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/08 19:31:39 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,55 @@ int		test(int key, void *param)
 		exit(0);
 	else
 		ft_putnbr(key);
+	ft_putchar('|');
 	return (0);
 }
 
+/*void	trace(t_pos pos, t_mlx *mlx, int color)
+{
+	double		a;
+	double		x;
+	double		y;
+	double		e;
+
+	a = (double)(pos.y2 - pos.y1) / (double)(pos.x2 - pos.x1);
+	e = a * -1 + 1;
+	x = pos.x1;
+	y = pos.y1;
+	e = 0;
+	while (x <= pos.x2)
+	{
+		mlx_pixel_put(mlx->ptr, mlx->win, (int)x, (int)y, color);
+		e -= a;
+		if (e < -0.5)
+		{
+			y--;
+			e += 1;
+		}
+		x++;
+	}
+}*/
+
 void	trace(t_pos pos, t_mlx *mlx, int color)
 {
-	double	a;
-	double	b;
-	int		x;
-	int		y;
+	int		e;
+	int		dx;
+	int		dy;
 
-	a = (double)(pos.y2 - pos.y1) / (pos.x2 - pos.x1);
-	printf("a = %f\n", a);
-	b = (double)pos.y1 - a * pos.x1;
-	printf("b = %f\n", b);
-	x = pos.x1;
-	while (x >= pos.x2)
+	e = abs(pos.x2 - pos.x1);
+	dx = 2 * e;
+	dy = 2 * abs(pos.y2 - pos.y1);
+
+	while (pos.x1 <= pos.x2)
 	{
-		y = (double)(a * x + b);
-//		printf("|%d", x);
-		mlx_pixel_put(mlx->ptr, mlx->win, x, y, color);
-//		printf("|%d", y);
-		x--;
+		pos.x1++;
+		e -= dy;
+		if (e < 0)
+		{
+			pos.y1--;
+			e += dx;
+		}
 	}
-
 }
 
 int		main()
@@ -64,46 +89,49 @@ int		main()
 
 
 	count = 0;
+
+
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x + 500;
-	pos.y2 = y + 750;
-	trace(pos, mlx, LYELLOW);//			4er octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 100;
+	trace(pos, mlx, LPURPLE);//			1e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x + 500;
-	pos.y2 = y + 250;
-	trace(pos, mlx, LGREEN);//			3e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 200;
+	trace(pos, mlx, LBLUE);//			2e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x + 500;
-	pos.y2 = y - 250;
-	trace(pos, mlx, LPURPLE);//			2e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 300;
+	trace(pos, mlx, DORANGE);//			3e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x + 500;
-	pos.y2 = y - 750;
-	trace(pos, mlx, LBLUE);//			1e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 400;
+	trace(pos, mlx, DGREEN);//			4e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x - 500;
-	pos.y2 = y - 750;
-	trace(pos, mlx, DORANGE);//			8e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 500;
+	trace(pos, mlx, DPURPLE);//			5e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x - 500;
-	pos.y2 = y - 250;
-	trace(pos, mlx, DGREEN);//			7e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 600;
+	trace(pos, mlx, DBLUE);//			6e octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x - 500;
-	pos.y2 = y + 250;
-	trace(pos, mlx, DPURPLE);//			6e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 700;
+	trace(pos, mlx, LYELLOW);//			7er octant
 	pos.x1 = x;
 	pos.y1 = y;
-	pos.x2 = x - 500;
-	pos.y2 = y + 750;
-	trace(pos, mlx, DBLUE);//			5e octant
+	pos.x2 = x + 1000;
+	pos.y2 = y + 800;
+	trace(pos, mlx, LGREEN);//			8e octant
+	mlx_mouse_hook(mlx->win, test, (void*)0);
 	mlx_key_hook(mlx->win, test, (void*)0);
 	mlx_loop(mlx->ptr);
 	return (0);
