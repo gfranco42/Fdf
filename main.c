@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/11 16:49:02 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/12 18:11:24 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,90 +99,70 @@ void	trace(t_pos pos, t_mlx *mlx, t_trace s, int color)
 		trace2(pos, mlx, s, color);
 }
 
-int		main()
+int		main(int ac, char **av)
 {
-	t_mlx		*mlx;
+	t_mlx		mlx;
 	t_pos		pos;
 	t_trace		s;
-	int			count;
-	int			line;
-	int			column;
-	int			i;
-	int			z = -20;
-	i = 0;
-	line = 4; // si 5 lignes : line = ligne - 1
-	column = 8; // si 9 colonnes : column = colonne - 1
+	int			***array;
 
-	pos.x1 = Xinit;
+	if (ac != 2)
+	{
+		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
+		return (0);
+	}
+	array = parse(pos, av[1]);
+//	mlx = malloc(sizeof(t_mlx));
+/*	pos.x1 = Xinit;
 	pos.y1 = Yinit;
-	pos.x2 = 620;
-	pos.y2 = 220;
+	pos.x2 = 590;
+	pos.y2 = 190;*/
 
-	mlx->ptr = mlx_init();
-	mlx->win = mlx_new_window(mlx->ptr, WIDTH, HEIGHT, "YOLO");
+	mlx.ptr = mlx_init();
+	printf("HEYEYEYEYEYE\n");
+	mlx.win = mlx_new_window(mlx.ptr, WIDTH, HEIGHT, "YOLO");
+	printf("YOLOOOOOOOOOOOOOOOOOOOOOOO\n");
 
-	count = 0;
+/*	count = 0;
 	trace(pos, mlx, s, LGREEN);
-	pos.x1 = 440;
-	pos.y1 = 160;
-	pos.x2 = 560;
-	pos.y2 = 280;
-	trace(pos, mlx, s, LBLUE);
 	pos.x1 = 410;
-	pos.y1 = 190;
-	pos.x2 = 530;
-	pos.y2 = 310;
-	trace(pos, mlx, s, DBLUE);
-	pos.x1 = 470;
-	pos.y1 = 130;
+	pos.y1 = (190 + 120);
 	pos.x2 = 500;
-	pos.y2 = 160 + z;// 160 + (-10) = 150
-	trace(pos, mlx, s, DGREEN);// 1er vert
-	pos.x1 = pos.x2;
-	pos.y1 = pos.y2;
-	pos.x2 = 530;
-	pos.y2 = 190;
-	trace(pos, mlx, s, DGREEN);// 2e vert
+	pos.y2 = (280 + 120);
+	trace(pos, mlx, s, LPURPLE);
 	pos.x1 = pos.x2;
 	pos.y1 = pos.y2;
 	pos.x2 = 590;
-	pos.y2 = 250;
-	trace(pos, mlx, s, DGREEN);// 3e vert
+	pos.y2 = (190 + 120);
+	trace(pos, mlx, s, DPURPLE);
+	pos.x1 = 410;
+	pos.y1 = 190;
+	pos.x2 = 500;
+	pos.y2 = 280;
+	trace(pos, mlx, s, DBLUE);
 	pos.x1 = 410;
 	pos.y1 = 190;
 	pos.x2 = 500;
 	pos.y2 = 100;
-	trace(pos, mlx, s, PINK);
-	pos.x1 = 440;
-	pos.y1 = 220;
-	pos.x2 = 470;
-	pos.y2 = 190;
-	trace(pos, mlx, s, LPURPLE);// 1e violet
-	pos.x1 = pos.x2;
-	pos.y1 = pos.y2;
-	pos.x2 = 500;
-	pos.y2 = 160 + z;
-	trace(pos, mlx, s, LPURPLE);// 2e violet
-	pos.x1 = pos.x2;
-	pos.y1 = pos.y2;
-	pos.x2 = 530;
-	pos.y2 = 130;
-	trace(pos, mlx, s, LPURPLE);// 3e violet
-	pos.x1 = 470;
-	pos.y1 = 250;
-	pos.x2 = 560;
-	pos.y2 = 160;
-	trace(pos, mlx, s, DPURPLE);
+	trace(pos, mlx, s, DGREEN);
+	pos.x2 = pos.x1;
+	pos.y2 = pos.y1 + 120;
+	trace(pos, mlx, s, DORANGE);
+	pos.x1 = 590;
+	pos.y1 = 190;
+	pos.x2 = pos.x1;
+	pos.y2 = pos.y1 + 120;
+	trace(pos, mlx, s, LYELLOW);
+	pos.x1 = 500;
+	pos.y1 = 280;
+	pos.x2 = pos.x1;
+	pos.y2 = pos.y1 + 120;
+	trace(pos, mlx, s, LORANGE);
 	pos.x1 = 500;
 	pos.y1 = 280;
 	pos.x2 = 590;
 	pos.y2 = 190;
-	trace(pos, mlx, s, RED);
-	pos.x1 = 530;
-	pos.y1 = 310;
-	pos.x2 = 620;
-	pos.y2 = 220;
-	trace(pos, mlx, s, DORANGE);
+	trace(pos, mlx, s, LBLUE);*/
 /*	pos.x1 = x;
 	pos.y1 = y;
 	pos.x2 = x + 321;
@@ -223,8 +203,11 @@ int		main()
 	pos.x2 = x + 1268;
 	pos.y2 = y + 289;
 	trace(pos, mlx, LGREEN);//			8e octant X++ Y+*/
-	mlx_mouse_hook(mlx->win, test, (void*)0);
-	mlx_key_hook(mlx->win, test, (void*)0);
-	mlx_loop(mlx->ptr);
+	mlx_mouse_hook(mlx.win, test, (void*)0);
+	printf("PROUT\n");
+	mlx_key_hook(mlx.win, test, (void*)0);
+	printf("WOWOWOWW\n");
+	mlx_loop(mlx.ptr);
+	printf("blqblqlbqlbql\n");
 	return (0);
 }

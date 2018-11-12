@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/11 16:46:20 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/12 16:54:48 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_pos
 	int		y1;
 	int		x2;
 	int		y2;
+	int		z;
 }					t_pos;
 
 typedef struct		s_trace
@@ -48,5 +49,7 @@ typedef struct		s_mlx
 	void	*ptr;
 	void	*win;
 }					t_mlx;
+
+int			***parse(t_pos pos, char *file);
 
 #endif
