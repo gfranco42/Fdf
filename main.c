@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/12 18:11:24 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/13 15:59:14 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,26 @@ int		main(int ac, char **av)
 {
 	t_mlx		mlx;
 	t_pos		pos;
+	t_init		init;
 	t_trace		s;
 	int			***array;
+	int			fd;
 
+	init.x = 500;
+	init.y = 100;
+	init.gap = 30;
 	if (ac != 2)
 	{
 		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
 		return (0);
 	}
-	array = parse(pos, av[1]);
+	array = stock(pos, av[1]);
+	fd = open(av[1], O_RDONLY);
+	array[0][0][0] = 1;
+	array[1][0][0] = 2;
+	printf("1 = %d\n", array[0][0][0]);
+	printf("2 = %d\n", array[1][0][0]);
+//	array = fill(array, init, fd);
 //	mlx = malloc(sizeof(t_mlx));
 /*	pos.x1 = Xinit;
 	pos.y1 = Yinit;

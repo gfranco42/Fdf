@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/12 16:54:48 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/13 15:04:52 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 
 # define WIDTH 1000
 # define HEIGHT 1000
-# define Xinit 500
-# define Yinit 100
 
 typedef struct		s_pos
 {
@@ -50,6 +48,21 @@ typedef struct		s_mlx
 	void	*win;
 }					t_mlx;
 
-int			***parse(t_pos pos, char *file);
+typedef struct		s_init
+{
+	int		x;
+	int		y;
+	int		gap;
+}					t_init;
+
+typedef struct		s_tri
+{
+	int		i;
+	int		j;
+	int		k;
+}					t_tri;
+
+int			***stock(t_pos pos, char *file);
+int			***fill(int ***arr, t_init init, int fd);
 
 #endif
