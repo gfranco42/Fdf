@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/13 15:04:52 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/16 16:52:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <mlx.h>
+# include <stdio.h>
 # include "./Libft/libft.h"
-# include "./colors.h"
+# include "colors.h"
 
 # define WIDTH 1000
 # define HEIGHT 1000
@@ -29,7 +30,7 @@ typedef struct		s_pos
 	int		y1;
 	int		x2;
 	int		y2;
-	int		z;
+	int		gap;
 }					t_pos;
 
 typedef struct		s_trace
@@ -62,7 +63,10 @@ typedef struct		s_tri
 	int		k;
 }					t_tri;
 
-int			***stock(t_pos pos, char *file);
-int			***fill(int ***arr, t_init init, int fd);
+int			**stock(char *file, int *line, int *column);
+int			**fill(int **array, t_tri t, int fd);
+void		xincr(int *x2, int *y2, t_tri t, t_init init);
+void		yincr(int *x2, int *y2, t_tri t, t_init init);
+void		move(int *x1, int *y1, int x2, int y2);
 
 #endif

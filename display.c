@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill.c                                             :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:45:46 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/16 14:36:20 by gfranco          ###   ########.fr       */
+/*   Created: 2018/11/16 16:14:31 by gfranco           #+#    #+#             */
+/*   Updated: 2018/11/16 17:44:12 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		**fill(int **array, t_tri t, int fd)
+void		xincr(int *x2, int *y2, t_tri t, t_init init)
 {
-	char	*line;
-	int		g;
+	*x2 = init.x + (t.i + 1) * init.gap;
+	*y2 = init.y + t.j * init.gap;
+}
 
-	t.i = 0;
-	t.j = 0;
-	t.k = -1;
-	while ((g = get_next_line(fd, &line)) == 1)
-	{
-		while (line[++t.k])
-		{
-			if (line[t.k] >= '0' && line[t.k] <= '9')
-			{
-				array[t.j][t.i] = line[t.k] - 1 == '-' ? (line[t.k] - 48) * -1 
-					: line[t.k] - 48;
-				t.i++;
-			}
-		}
-		free(line);
-		t.i = 0;
-		t.j++;
-		t.k = -1;
-	}
-	close(fd);
-	return (array);
+void		yincr(int *x2, int *y2, t_tri t, t_init init)
+{
+	*x2 = init.x + t.i * init.gap;
+	*y2 = init.y + (t.j - 1) * init.gap;
+}
+
+//void		ydecr(int *x2, int *y2, t_tri t, t_init init)
+//{
+//	*x2 = init.x + 
+//}
+
+void		move(int *x1, int *y1, int x2, int y2)
+{
+	*x1 = x2;
+	*y1 = y2;
 }

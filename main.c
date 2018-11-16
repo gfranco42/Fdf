@@ -6,13 +6,25 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/13 15:59:14 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/16 18:44:38 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdio.h>
 #include "fdf.h"
+
+int		test2(int key, int *gap)
+{
+	if (key == 78)
+		*gap -= 2;
+	else if (key == 69)
+		*gap += 2;
+	else
+		ft_putnbr(key);
+	ft_putchar('|');
+	return (0);
+}
 
 int		test(int key, void *param)
 {
@@ -24,39 +36,14 @@ int		test(int key, void *param)
 	return (0);
 }
 
-/*void	trace(t_pos pos, t_mlx *mlx, int color)
-{
-	double		a;
-	double		x;
-	double		y;
-	double		e;
-
-	a = (double)(pos.y2 - pos.y1) / (double)(pos.x2 - pos.x1);
-	e = a * -1 + 1;
-	x = pos.x1;
-	y = pos.y1;
-	e = 0;
-	while (x <= pos.x2)
-	{
-		mlx_pixel_put(mlx->ptr, mlx->win, (int)x, (int)y, color);
-		e -= a;
-		if (e < -0.5)
-		{
-			y--;
-			e += 1;
-		}
-		x++;
-	}
-}*/
-
-void	trace1(t_pos pos, t_mlx *mlx, t_trace s, int color)
+void	trace1(t_pos pos, t_mlx mlx, t_trace s, int color)
 {
 	int		i;
 
 	i = 0;
 	while (i++ <= s.cx)
 	{
-		mlx_pixel_put(mlx->ptr, mlx->win, pos.x1, pos.y1, color);
+		mlx_pixel_put(mlx.ptr, mlx.win, pos.x1, pos.y1, color);
 		pos.x1 = pos.x1 > pos.x2 ? (pos.x1 - 1) : (pos.x1 + 1);
 		s.ex -= s.dy;
 		if (s.ex < 0)
@@ -67,14 +54,14 @@ void	trace1(t_pos pos, t_mlx *mlx, t_trace s, int color)
 	}
 }
 
-void	trace2(t_pos pos, t_mlx *mlx, t_trace s, int color)
+void	trace2(t_pos pos, t_mlx mlx, t_trace s, int color)
 {
 	int		i;
 
 	i = 0;
 	while (i++ <= s.cy)
 	{
-		mlx_pixel_put(mlx->ptr, mlx->win, pos.x1, pos.y1, color);
+		mlx_pixel_put(mlx.ptr, mlx.win, pos.x1, pos.y1, color);
 		pos.y1 = pos.y1 > pos.y2 ? (pos.y1 - 1) : (pos.y1 + 1);
 		s.ey -= s.dx;
 		if (s.ey < 0)
@@ -85,7 +72,7 @@ void	trace2(t_pos pos, t_mlx *mlx, t_trace s, int color)
 	}
 }
 
-void	trace(t_pos pos, t_mlx *mlx, t_trace s, int color)
+void	trace(t_pos pos, t_mlx mlx, t_trace s, int color)
 {
 	s.ex = abs(pos.x2 - pos.x1);
 	s.ey = abs(pos.y2 - pos.y1);
@@ -104,36 +91,66 @@ int		main(int ac, char **av)
 	t_mlx		mlx;
 	t_pos		pos;
 	t_init		init;
+	t_tri		t;
 	t_trace		s;
-	int			***array;
+	int			**array;
 	int			fd;
+	int			line;
+	int			column;
 
-	init.x = 500;
-	init.y = 100;
-	init.gap = 30;
+	mlx.ptr = mlx_init();
+	mlx.win = mlx_new_window(mlx.ptr, WIDTH, HEIGHT, "YOLO");
+
+	line = 0;
+	column = 0;
+	init.gap = 20;
+	t.i = 0;
+	t.j = 0;
+	t.k = 0;
 	if (ac != 2)
 	{
 		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
 		return (0);
 	}
-	array = stock(pos, av[1]);
+	array = stock(av[1], &line, &column);
+	init.x = WIDTH / 2 - (column * init.gap) / 2;
+	init.y = HEIGHT / 2 - (line * init.gap) / 2;
+	pos.x1 = init.x;
+	pos.y1 = init.y;
 	fd = open(av[1], O_RDONLY);
-	array[0][0][0] = 1;
-	array[1][0][0] = 2;
-	printf("1 = %d\n", array[0][0][0]);
-	printf("2 = %d\n", array[1][0][0]);
-//	array = fill(array, init, fd);
+	array = fill(array, t, fd);
+	while (t.i < column - 1 || t.j < line - 1)
+	{
+		if (t.j != 0)
+		{
+			printf("YOLO\n");
+			yincr(&pos.x2, &pos.y2, t, init);
+			trace(pos, mlx, s, DGREEN);
+		}
+		xincr(&pos.x2, &pos.y2, t, init);// donne valeur au point a relier
+		printf("x1: %d, y1: %d\n", pos.x1, pos.y1);
+		printf("x2: %d, y2: %d\n\n", pos.x2, pos.y2);
+		trace(pos, mlx, s, DBLUE);// trace x1;y1 a x2;y2
+		move(&pos.x1, &pos.y1, pos.x2, pos.y2);// je deplace x1;y1
+		t.i++;
+		if (t.i == column - 1 && t.j != 0)
+		{
+			yincr(&pos.x2, &pos.y2, t, init);
+			trace(pos, mlx, s, DGREEN);
+		}
+		if (t.i == column - 1 && t.j != line - 1)
+		{
+			t.j++;
+			t.i = 0;
+			pos.x1 = init.x;
+			pos.y1 = init.y + t.j * init.gap;
+		}
+	}
 //	mlx = malloc(sizeof(t_mlx));
 /*	pos.x1 = Xinit;
 	pos.y1 = Yinit;
 	pos.x2 = 590;
 	pos.y2 = 190;*/
-
-	mlx.ptr = mlx_init();
-	printf("HEYEYEYEYEYE\n");
-	mlx.win = mlx_new_window(mlx.ptr, WIDTH, HEIGHT, "YOLO");
-	printf("YOLOOOOOOOOOOOOOOOOOOOOOOO\n");
-
 /*	count = 0;
 	trace(pos, mlx, s, LGREEN);
 	pos.x1 = 410;
@@ -214,11 +231,9 @@ int		main(int ac, char **av)
 	pos.x2 = x + 1268;
 	pos.y2 = y + 289;
 	trace(pos, mlx, LGREEN);//			8e octant X++ Y+*/
-	mlx_mouse_hook(mlx.win, test, (void*)0);
-	printf("PROUT\n");
+	mlx_mouse_hook(mlx.win, test2, (void*)0);
 	mlx_key_hook(mlx.win, test, (void*)0);
-	printf("WOWOWOWW\n");
+	mlx_key_hook(mlx.win, test2, (void*)0);
 	mlx_loop(mlx.ptr);
-	printf("blqblqlbqlbql\n");
 	return (0);
 }
