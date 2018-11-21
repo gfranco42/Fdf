@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/20 16:44:00 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/21 13:53:31 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		nb_column(char *file)
 	g = get_next_line(fd, &line);
 	while (line[i])
 	{
+		printf("line[%d] = %c\n", i, line[i]);
 		if (line[i] >= '0' && line[i] <= '9')
 			nbr++;
 		i++;
@@ -55,15 +56,15 @@ int		nb_line(char *file)
 	return (nbr);
 }
 
-int		**make_array(t_tool *t)
+int		**make_array(t_m *m)
 {
 	int		**array;
 	int		i;
 	int		idx;
 
-	idx = t->line;
 	i = 0;
-	if (!(array = (int**)malloc(sizeof(*array) * (t->line + 1))))
+	idx = m->line;
+	if (!(array = (int**)malloc(sizeof(*array) * (idx + 1))))
 		exit(EXIT_FAILURE);
 	while (idx-- > 0)
 	{
@@ -73,19 +74,19 @@ int		**make_array(t_tool *t)
 				exit(EXIT_FAILURE);
 		}
 		else
-			if (!(array[i] = (int*)malloc(sizeof(*array) * t->column)))
+			if (!(array[i] = (int*)malloc(sizeof(*array) * m->column)))
 				exit(EXIT_FAILURE);
 		i++;
 	}
 	return (array);
 }
 
-int		**stock(char *file, t_tool *t)
+int		**stock(char *file, t_m *m)
 {
 	int		**array;
 
-	t->line = nb_line(file);
-	t->column = nb_column(file);
-	array = make_array(t);
+	m->line = nb_line(file);
+	m->column = nb_column(file);
+	array = make_array(m);
 	return (array);
 }

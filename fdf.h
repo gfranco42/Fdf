@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/20 18:00:07 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/21 17:50:53 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,43 @@
 
 
 
-typedef struct		s_trace
+typedef struct		s_m
 {
+	void	*ptr;
+	int		*win;
 	int		ex;
 	int		ey;
 	int		cx;
 	int		cy;
 	int		dx;
 	int		dy;
+	int		line;
+	int		lenline;
+	int		column;
+	int		lencolumn;
+	double	xinit;
+	double	yinit;
+	double	initgap;
+	double	savegap;
+	double	gap;
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
-}					t_trace;
-
-typedef struct		s_tri
-{
 	int		i;
 	int		j;
 	int		k;
-}					t_tri;
+}					t_m;
 
-typedef struct		s_tool
-{
-	void	*ptr;
-	int		*win;
-	int		xinit;
-	int		yinit;
-	int		gap;
-	int		line;
-	int		column;
-}					t_tool;
-
-typedef struct		s_all
-{
-	t_tool	*t;
-	t_trace	s;
-	t_tri	v;
-}					t_all;
-
-int			**stock(char *file, t_tool *t);
-int			**fill(int **array, t_tool *t, int fd, t_tri v);
-void		trace(t_tool *t, t_trace s, int color);
-void		draw(t_tool *t, t_tri v, t_trace s);
+int			**stock(char *file, t_m *m);
+int			**fill(int **array, int fd, t_m m);
+void		trace(t_m m, int color);
+void		draw(t_m m);
+void		init_variable(t_m *m);
+void		redraw_move(t_m *m, float a, float b);
+void		redraw_zoom_in(t_m *m);
+void		redraw_zoom_out(t_m *m);
+void		clean(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/

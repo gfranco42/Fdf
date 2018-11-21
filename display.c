@@ -6,56 +6,64 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 16:14:31 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/20 17:58:24 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/21 11:25:00 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void		xincr(t_tool *t, t_tri v, int *x2, int *y2)
+void		xincr(t_m m, int *x2, int *y2)
 {
-	*x2 = t->xinit + (v.i + 1) * t->gap;
-	*y2 = t->yinit + v.j * t->gap;
+	*x2 = m.xinit + (m.i + 1) * m.gap;
+	*y2 = m.yinit + m.j * m.gap;
 }
 
-void		yincr(t_tool *t, t_tri v, int *x2, int *y2)
+void		yincr(t_m m, int *x2, int *y2)
 {
-	*x2 = t->xinit + v.i * t->gap;
-	*y2 = t->yinit + (v.j - 1) * t->gap;
+	*x2 = m.xinit + m.i * m.gap;
+	*y2 = m.yinit + (m.j - 1) * m.gap;
 }
 
-void		move(t_trace s, int *x1, int *y1)
+void		next(t_m *m)
 {
-	*x1 = s.x2;
-	*y1 = s.y2;
+	m->x1 = m->x2;
+	m->y1 = m->y2;
 }
 
-void		draw(t_tool *t, t_tri v, t_trace s)
+void		init_variable(t_m *m)
 {
-	v.i = 0;
-	v.j = 0;
-	while (v.i < t->column - 1 || v.j < t->line - 1)
+	m->xinit = WIDTH / 2 - (m->column * m->gap) / 2;
+	m->yinit = HEIGHT / 2 - (m->line * m->gap) / 2;
+	m->x1 = m->xinit;
+	m->y1 = m->yinit;
+}
+
+void		draw(t_m m)
+{
+	m.i = 0;
+	m.j = 0;
+	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
-		if (v.j != 0)
+		if (m.j != 0)
 		{
-			yincr(t, v, &s.x2, &s.y2);
-			trace(t, s, DGREEN);
+			yincr(m, &(m.x2), &(m.y2));
+			trace(m, DGREEN);
 		}
-		xincr(t, v, &s.x2, &s.y2);
-		trace(t, s, DBLUE);
-		move(s, &s.x1, &s.y1);
-		v.i++;
-		if (v.i == t->column - 1 && v.j != 0)
+		xincr(m, &(m.x2), &(m.y2));
+		trace(m, DBLUE);
+		next(&m);
+		m.i++;
+		if (m.i == m.column - 1 && m.j != 0)
 		{
-			yincr(t, v, &s.x2, &s.y2);
-			trace(t, s, DGREEN);
+			yincr(m, &(m.x2), &(m.y2));
+			trace(m, DGREEN);
 		}
-		if (v.i == t->column - 1 && v.j != t->line - 1)
+		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
-			v.j++;
-			v.i = 0;
-			s.x1 = t->xinit;
-			s.y1 = t->yinit + v.j * t->gap;
+			m.j++;
+			m.i = 0;
+			m.x1 = m.xinit;
+			m.y1 = m.yinit + m.j * m.gap;
 		}
 	}
 }
