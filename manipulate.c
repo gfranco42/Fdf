@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:23:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/21 17:52:51 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/26 19:23:07 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,70 @@
 
 void	redraw_move(t_m *m, float a, float b)
 {
-	mlx_clear_window(m->ptr, m->win);
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->xinit += a;
 	m->yinit += b;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
 	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	redraw_zoom_in(t_m *m)
 {
-	mlx_clear_window(m->ptr, m->win);
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->xinit -= (m->gap - m->savegap) * (m->column - 1) / 2;
 	m->yinit -= (m->gap - m->savegap) * (m->line - 1) / 2;
 	m->savegap = m->gap;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
 	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	redraw_zoom_out(t_m *m)
 {
-	mlx_clear_window(m->ptr, m->win);
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->xinit -= (m->gap - m->savegap) * (m->column - 1) / 2;
 	m->yinit -= (m->gap - m->savegap) * (m->line - 1) / 2;
 	m->savegap = m->gap;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
 	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
-void	clean(t_m *m)
+void	iso(t_m *m)
 {
-	mlx_clear_window(m->ptr, m->win);
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	m->gap = m->initgap;
+	m->savegap = m->initgap;
+	m->xinit = WIDTH / 2 - ((m->column - 1) * m->gap) / 2;
+	m->yinit = HEIGHT / 2 - ((m->line - 1) * m->gap) / 2;
+	m->x1 = m->xinit;
+	m->y1 = m->yinit;
+	draw_iso(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+}
+
+void	paralelle(t_m *m)
+{
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->gap = m->initgap;
 	m->savegap = m->initgap;
 	m->xinit = WIDTH / 2 - ((m->column - 1) * m->gap) / 2;
@@ -54,7 +85,25 @@ void	clean(t_m *m)
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
 	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
+
+void	conique(t_m *m)
+{
+//	mlx_clear_window(m->ptr, m->win);
+//	mlx_destroy_image(m->ptr, m->img);
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	m->gap = m->initgap;
+	m->savegap = m->initgap;
+	m->xinit = WIDTH / 2 - ((m->column - 1) * m->gap) / 2;
+	m->yinit = HEIGHT / 2 - ((m->line - 1) * m->gap) / 2;
+	m->x1 = m->xinit;
+	m->y1 = m->yinit;
+	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+}
+
 /*void		moving(t_m *m)
 {
 	

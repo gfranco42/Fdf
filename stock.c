@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/21 13:53:31 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/26 14:39:44 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ int		nb_column(char *file)
 
 	i = 0;
 	nbr = 0;
-	fd = open(file, O_RDONLY);
+//	fd = open(file, O_RDONLY);
+	if ((fd = open(file, O_RDONLY)) == -1)
+	{
+		ft_putstr("Failed to open <FILE>\n");
+		exit(EXIT_FAILURE);
+	}
 	g = get_next_line(fd, &line);
 	while (line[i])
 	{
-		printf("line[%d] = %c\n", i, line[i]);
 		if (line[i] >= '0' && line[i] <= '9')
 			nbr++;
 		i++;
@@ -46,7 +50,12 @@ int		nb_line(char *file)
 	int		test;
 
 	nbr = 0;
-	fd = open(file, O_RDONLY);
+//	fd = open(file, O_RDONLY);
+	if ((fd = open(file, O_RDONLY)) == -1)
+	{
+		ft_putstr("Failed to open <FILE>\n");
+		exit(EXIT_FAILURE);
+	}
 	while (get_next_line(fd, &line) > 0)
 	{
 		nbr++;

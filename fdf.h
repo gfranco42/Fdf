@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/21 17:50:53 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/26 19:22:12 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include "./Libft/libft.h"
 # include "colors.h"
+# include <math.h>
 
 # define WIDTH 1000
 # define HEIGHT 1000
@@ -29,7 +30,16 @@
 typedef struct		s_m
 {
 	void	*ptr;
+	void	*img;
 	int		*win;
+	char	*str;
+	char	red;
+	char	green;
+	char	blue;
+	char	alpha;
+	int		bpp;
+	int		s_l;
+	int		endian;
 	int		ex;
 	int		ey;
 	int		cx;
@@ -58,11 +68,14 @@ int			**stock(char *file, t_m *m);
 int			**fill(int **array, int fd, t_m m);
 void		trace(t_m m, int color);
 void		draw(t_m m);
+void		draw_iso(t_m m);
 void		init_variable(t_m *m);
 void		redraw_move(t_m *m, float a, float b);
 void		redraw_zoom_in(t_m *m);
 void		redraw_zoom_out(t_m *m);
-void		clean(t_m *m);
+void		iso(t_m *m);
+void		paralelle(t_m *m);
+void		conique(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/
