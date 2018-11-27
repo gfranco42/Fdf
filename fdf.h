@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/26 19:22:12 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:06:43 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ void		init_variable(t_m *m);
 void		redraw_move(t_m *m, float a, float b);
 void		redraw_zoom_in(t_m *m);
 void		redraw_zoom_out(t_m *m);
+void		zero(t_m *m);
 void		iso(t_m *m);
 void		paralelle(t_m *m);
 void		conique(t_m *m);
+void		xrotate(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/

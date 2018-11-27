@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/26 19:13:18 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/27 18:02:50 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ int		key_clean(int key, void *param)
 	return (0);
 }
 
+int		key_rotate(int key, void *param)
+{
+	t_m	*m;
+
+	m = (t_m *)param;
+	if (key == 83)// iso
+		xrotate(m);
+	return (0);
+}
+
 int		key(int key, void *param)
 {
 	int		a;
@@ -77,8 +87,9 @@ int		key(int key, void *param)
 		key_move(key, param);
 	else if (key == 69 || key == 78 || key == 53)
 		key_zoom(key, param);
-	else if (key == 34 || key == 35 || key == 8)
-		key_clean(key, param);
+	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
+			key == 91)
+		key_rotate(key, param);
 	ft_putnbr(key);
 	ft_putchar('|');
 	return (0);

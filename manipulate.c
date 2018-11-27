@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:23:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/26 19:23:07 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/27 17:06:40 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ void	redraw_zoom_out(t_m *m)
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
+void	zero(t_m *m)
+{
+	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	m->xinit = 0 - (m->column - 1) * m->initgap / 2;
+	m->yinit = 0 - (m->line - 1) * m->initgap / 2;
+	m->x1 = m->xinit;
+	m->y1 = m->yinit;
+	draw(*m);
+	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+}
+
 void	iso(t_m *m)
 {
 //	mlx_clear_window(m->ptr, m->win);
@@ -64,8 +76,8 @@ void	iso(t_m *m)
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->gap = m->initgap;
 	m->savegap = m->initgap;
-	m->xinit = WIDTH / 2 - ((m->column - 1) * m->gap) / 2;
-	m->yinit = HEIGHT / 2 - ((m->line - 1) * m->gap) / 2;
+	m->xinit = WIDTH / 2;
+	m->yinit = HEIGHT / 4;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
 	draw_iso(*m);
