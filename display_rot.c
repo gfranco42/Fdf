@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 16:14:31 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 16:00:26 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 18:17:59 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void		draw(t_m m)
 		if (m.j != 0)
 		{
 			yincr(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		xincr(m, &(m.x2), &(m.y2));
-		trace(m, DBLUE);
+		trace(m);
 		next(&m);
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
 			yincr(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
@@ -97,16 +97,16 @@ void		draw_rot(t_m m)
 		if (m.j != 0)
 		{
 			yincr_rot(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		xincr_rot(m, &(m.x2), &(m.y2));
-		trace(m, DBLUE);
+		trace(m);
 		next(&m);
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
 			yincr_rot(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{

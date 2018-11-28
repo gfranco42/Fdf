@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 17:27:25 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 17:59:48 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int		key(int key, void *param)
 	return (0);
 }
 
-void	trace1(t_m m, int color)
+void	trace1(t_m m)
 {
 	m.i = 0;
 	while (m.i++ <= m.cx && m.x1 <= WIDTH && m.y1 <= HEIGHT && m.y1 >= 0)
@@ -171,7 +171,7 @@ void	trace1(t_m m, int color)
 	}
 }
 
-void	trace2(t_m m, int color)
+void	trace2(t_m m)
 {
 	m.i = 0;
 	while (m.i++ <= m.cy && m.x1 <= WIDTH && m.x1 >= 0 && m.y1 >= 0)
@@ -193,7 +193,7 @@ void	trace2(t_m m, int color)
 	}
 }
 
-void	trace(t_m m, int color)
+void	trace(t_m m)
 {
 	m.ex = abs(m.x2 - m.x1);
 	m.ey = abs(m.y2 - m.y1);
@@ -202,9 +202,9 @@ void	trace(t_m m, int color)
 	m.cx = m.ex;
 	m.cy = m.ey;
 	if (m.cx > m.cy)
-		trace1(m, color);
+		trace1(m);
 	else
-		trace2(m, color);
+		trace2(m);
 }
 
 int		main(int ac, char **av)
@@ -226,7 +226,7 @@ int		main(int ac, char **av)
 	m.blue = 0xff;
 	m.xtheta = 0;
 	m.ytheta = 0;
-	m.ztheta = 45;
+	m.ztheta = 0;
 	m.z = 0;
 	m.i = 0;
 	m.j = 0;

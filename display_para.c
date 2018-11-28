@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   display_para.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 16:14:31 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 16:00:26 by gfranco          ###   ########.fr       */
+/*   Created: 2018/11/28 17:29:39 by gfranco           #+#    #+#             */
+/*   Updated: 2018/11/28 17:58:13 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void		draw(t_m m)
 		if (m.j != 0)
 		{
 			yincr(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		xincr(m, &(m.x2), &(m.y2));
-		trace(m, DBLUE);
+		trace(m);
 		next(&m);
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
 			yincr(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
+			trace(m);
 		}
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
@@ -64,56 +64,6 @@ void		draw(t_m m)
 			m.i = 0;
 			m.x1 = m.xinit;
 			m.y1 = m.yinit + m.j * m.gap;
-		}
-	}
-}
-
-void		yincr_rot(t_m m, int *x2, int *y2)
-{
-	zero(&m);
-	*x2 = m.xinit + m.i * m.gap;
-	*y2 = m.yinit + (m.j - 1) * m.gap;
-	xrotate(&m);
-	yrotate(&m);
-	zrotate(&m);
-}
-
-void		xincr_rot(t_m m, int *x2, int *y2)
-{
-	zero(&m);
-	*x2 = m.xinit + (m.i + 1) * m.gap;
-	*y2 = m.yinit + m.j * m.gap;
-	xrotate(&m);
-	yrotate(&m);
-	zrotate(&m);
-}
-
-void		draw_rot(t_m m)
-{
-	m.i = 0;
-	m.j = 0;
-	while (m.i < m.column - 1 || m.j < m.line - 1)
-	{
-		if (m.j != 0)
-		{
-			yincr_rot(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
-		}
-		xincr_rot(m, &(m.x2), &(m.y2));
-		trace(m, DBLUE);
-		next(&m);
-		m.i++;
-		if (m.i == m.column - 1 && m.j != 0)
-		{
-			yincr_rot(m, &(m.x2), &(m.y2));
-			trace(m, DGREEN);
-		}
-		if (m.i == m.column - 1 && m.j != m.line - 1)
-		{
-			m.j++;
-			m.i = 0;
-			m.x1 = m.xinit;
-			m.y1 = (m.yinit + m.j * m.gap) / 2;
 		}
 	}
 }

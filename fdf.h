@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 16:06:31 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 17:57:23 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct		s_m
 
 int			**stock(char *file, t_m *m);
 int			**fill(int **array, int fd, t_m m);
-void		trace(t_m m, int color);
+void		trace(t_m m);
 void		draw(t_m m);
 void		draw_rot(t_m m);
 void		init_variable(t_m *m);
