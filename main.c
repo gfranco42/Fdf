@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/27 18:02:50 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 17:27:25 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,60 @@ int		key_rotate(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
-	if (key == 83)// iso
+	if (key == 83)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->xtheta += 10;
 		xrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 84)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->xtheta -= 10;
+		xrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 86)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->ytheta += 10;
+		yrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 87)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->ytheta -= 10;
+		yrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 89)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->ztheta += 10;
+		zrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 91)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->ztheta -= 10;
+		zrotate(m);
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
 	return (0);
 }
 
@@ -87,6 +139,8 @@ int		key(int key, void *param)
 		key_move(key, param);
 	else if (key == 69 || key == 78 || key == 53)
 		key_zoom(key, param);
+	else if (key == 34 || key == 35 || key == 8)
+		key_clean(key, param);
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
 			key == 91)
 		key_rotate(key, param);
@@ -170,6 +224,10 @@ int		main(int ac, char **av)
 	m.red = 0xff;
 	m.green = 0xff;
 	m.blue = 0xff;
+	m.xtheta = 0;
+	m.ytheta = 0;
+	m.ztheta = 45;
+	m.z = 0;
 	m.i = 0;
 	m.j = 0;
 	m.k = 0;

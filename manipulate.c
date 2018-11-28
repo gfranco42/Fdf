@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:23:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/27 17:06:40 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 15:59:32 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	zero(t_m *m)
 	m->yinit = 0 - (m->line - 1) * m->initgap / 2;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
-	draw(*m);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+//	draw(*m);
+//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	iso(t_m *m)
@@ -80,7 +80,7 @@ void	iso(t_m *m)
 	m->yinit = HEIGHT / 4;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
-	draw_iso(*m);
+	draw(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
@@ -115,8 +115,3 @@ void	conique(t_m *m)
 	draw(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
-
-/*void		moving(t_m *m)
-{
-	
-}*/

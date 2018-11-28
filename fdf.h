@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/27 17:06:43 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 16:06:31 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ typedef struct		s_m
 	double	initgap;
 	double	savegap;
 	double	gap;
+	double	xtheta;
+	double	ytheta;
+	double	ztheta;
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
+	int		z;
 	int		i;
 	int		j;
 	int		k;
@@ -68,7 +72,7 @@ int			**stock(char *file, t_m *m);
 int			**fill(int **array, int fd, t_m m);
 void		trace(t_m m, int color);
 void		draw(t_m m);
-void		draw_iso(t_m m);
+void		draw_rot(t_m m);
 void		init_variable(t_m *m);
 void		redraw_move(t_m *m, float a, float b);
 void		redraw_zoom_in(t_m *m);
@@ -78,6 +82,8 @@ void		iso(t_m *m);
 void		paralelle(t_m *m);
 void		conique(t_m *m);
 void		xrotate(t_m *m);
+void		yrotate(t_m *m);
+void		zrotate(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/
