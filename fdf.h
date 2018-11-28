@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 17:57:23 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 20:15:41 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct		s_m
 	int		lenline;
 	int		column;
 	int		lencolumn;
+	double	tmpx;
+	double	tmpy;
 	double	xinit;
 	double	yinit;
 	double	initgap;
@@ -78,6 +80,8 @@ void		redraw_move(t_m *m, float a, float b);
 void		redraw_zoom_in(t_m *m);
 void		redraw_zoom_out(t_m *m);
 void		zero(t_m *m);
+void		back(t_m *m);
+void		next(t_m *m);
 void		iso(t_m *m);
 void		paralelle(t_m *m);
 void		conique(t_m *m);

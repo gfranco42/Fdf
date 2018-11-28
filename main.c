@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 17:59:48 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/28 19:46:11 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,27 @@ int		key_rotate(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
+	if (key == 65)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		back(m);
+		draw(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	if (key == 82)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		zero(m);
+		draw(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
 	if (key == 83)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta += 10;
-		xrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -142,7 +157,7 @@ int		key(int key, void *param)
 	else if (key == 34 || key == 35 || key == 8)
 		key_clean(key, param);
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
-			key == 91)
+			key == 91 || key == 82 || key == 65)
 		key_rotate(key, param);
 	ft_putnbr(key);
 	ft_putchar('|');
@@ -152,9 +167,9 @@ int		key(int key, void *param)
 void	trace1(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cx && m.x1 <= WIDTH && m.y1 <= HEIGHT && m.y1 >= 0)
+	while (m.i++ <= m.cx && m.y1 < HEIGHT && m.y1 > 0)
 	{
-		if (m.x1 >= 0)
+		if (m.x1 > 0 && m.x1 < WIDTH)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = 0;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = 0;
@@ -174,14 +189,15 @@ void	trace1(t_m m)
 void	trace2(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cy && m.x1 <= WIDTH && m.x1 >= 0 && m.y1 >= 0)
+	while (m.i++ <= m.cy && m.x1 < WIDTH && m.x1 > 0)
 	{
-		if (m.y1 <= HEIGHT)
+		if (m.y1 < HEIGHT && m.y1 > 0)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = 0;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = 0;
 		}
+		printf("x1: %d, y1: %d, x2: %d, y2: %d\n", m.x1, m.y1, m.x2, m.y2);
 //		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
 		m.ey -= m.dx;
