@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/26 14:39:44 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 17:27:23 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		nb_line(char *file)
 	char	*line;
 	int		fd;
 	int		nbr;
-	int		test;
 
 	nbr = 0;
 //	fd = open(file, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 19:46:11 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 17:27:14 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		key_rotate(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
-	if (key == 65)
+/*	if (key == 65)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
@@ -86,7 +86,7 @@ int		key_rotate(int key, void *param)
 		zero(m);
 		draw(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	}
+	}*/
 	if (key == 83)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
@@ -100,7 +100,6 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta -= 10;
-		xrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -109,7 +108,6 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta += 10;
-		yrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -118,7 +116,6 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta -= 10;
-		yrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -127,7 +124,6 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta += 10;
-		zrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -136,7 +132,6 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta -= 10;
-		zrotate(m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -145,8 +140,6 @@ int		key_rotate(int key, void *param)
 
 int		key(int key, void *param)
 {
-	int		a;
-	int		b;
 	t_m *m;
 
 	m = (t_m*)param;
