@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 20:15:41 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 16:57:35 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void		conique(t_m *m);
 void		xrotate(t_m *m);
 void		yrotate(t_m *m);
 void		zrotate(t_m *m);
+void		first_x_rotate(t_m *m);
+void		first_y_rotate(t_m *m);
+void		first_z_rotate(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/

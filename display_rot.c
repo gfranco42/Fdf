@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/28 20:20:50 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 16:57:32 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,33 @@ void		xincr_rot(t_m m, int *x2, int *y2)
 	zrotate(&m);
 }
 
-/*void	init_rot(t_m *m)
+void	first_back(t_m *m)
 {
-	m->i = 0;
-	m->j = 0;
-	zero(&m);
-}*/
+	m->x1 = m->tmpx + WIDTH / 2;
+	m->y1 = m->tmpy + HEIGHT / 2;
+//	draw(*m);
+//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+}
 
 void	back(t_m *m)
 {
-	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	m->xinit = m->tmpx + WIDTH / 2;
 	m->yinit = m->tmpy + HEIGHT / 2;
 	m->x1 = m->xinit;
 	m->y1 = m->yinit;
-	draw(*m);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+//	draw(*m);
+//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+}
+
+void	init_rot(t_m *m)
+{
+	m->i = 0;
+	m->j = 0;
+	zero(m);
+	first_x_rotate(m);
+	first_y_rotate(m);
+	first_z_rotate(m);
+	first_back(m);
 }
 
 void	zero(t_m *m)
@@ -59,8 +69,8 @@ void	zero(t_m *m)
 	m->y1 = m->yinit;
 	m->tmpx = m->xinit;
 	m->tmpy = m->yinit;
-	draw(*m);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+//	draw(*m);
+//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void		draw_rot(t_m m)
@@ -88,8 +98,8 @@ void		draw_rot(t_m m)
 		{
 			m.j++;
 			m.i = 0;
-			m.x1 = m.xinit;
-			m.y1 = (m.yinit + m.j * m.gap) / 2;
+			m.x1 = m.tmpx;
+			m.y1 = (m.tmpy + m.j * m.gap) / 2;
 		}
 	}
 }
