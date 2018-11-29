@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 16:57:35 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 20:20:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ typedef struct		s_m
 	int		lenline;
 	int		column;
 	int		lencolumn;
-	double	tmpx;
-	double	tmpy;
 	double	xinit;
 	double	yinit;
+	double	xout;
+	double	yout;
+	double	xlen;
+	double	ylen;
 	double	initgap;
 	double	savegap;
 	double	gap;
@@ -91,6 +93,9 @@ void		zrotate(t_m *m);
 void		first_x_rotate(t_m *m);
 void		first_y_rotate(t_m *m);
 void		first_z_rotate(t_m *m);
+void		x1rotate(t_m *m);
+void		y1rotate(t_m *m);
+void		z1rotate(t_m *m);
 /*void		xincr(t_tool *t, t_tri v);
 void		yincr(t_tool *t, t_tri v);
 void		move(t_tool *t);*/

@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 17:27:14 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 20:11:26 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	trace1(t_m m)
 		if (m.x1 > 0 && m.x1 < WIDTH)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = 0;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = 0;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
 		}
 //		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
@@ -187,10 +187,9 @@ void	trace2(t_m m)
 		if (m.y1 < HEIGHT && m.y1 > 0)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = 0;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = 0;
 		}
-		printf("x1: %d, y1: %d, x2: %d, y2: %d\n", m.x1, m.y1, m.x2, m.y2);
 //		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
 		m.ey -= m.dx;
@@ -231,7 +230,7 @@ int		main(int ac, char **av)
 	m.gap = m.initgap;
 	m.savegap = m.initgap;
 	m.red = 0xff;
-	m.green = 0xff;
+	m.green = 0;
 	m.blue = 0xff;
 	m.xtheta = 0;
 	m.ytheta = 0;
@@ -240,6 +239,8 @@ int		main(int ac, char **av)
 	m.i = 0;
 	m.j = 0;
 	m.k = 0;
+	m.xout = 0;
+	m.yout = 0;
 	if (ac != 2)
 	{
 		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
