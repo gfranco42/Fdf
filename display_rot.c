@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 20:29:37 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 20:32:40 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	init_rot(t_m *m)
 	first_z_rotate(m);
 	back(m);
 }
+
+//	voir peut etre pour l'utilisation des matrices...
+//	voir peut etre pour la valeur de x1 y1 quand je relie...
 
 void	zero(t_m *m)
 {
