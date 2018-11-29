@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 16:57:32 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/29 16:59:28 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		draw_rot(t_m m)
 {
 	m.i = 0;
 	m.j = 0;
-//	init_rot(&m);
+	init_rot(&m);
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		if (m.j != 0)
