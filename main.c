@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 20:11:26 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/30 18:36:04 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int		key_rotate(int key, void *param)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ztheta += 10;
+		m->ztheta += 5;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -131,9 +131,77 @@ int		key_rotate(int key, void *param)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ztheta -= 10;
+		m->ztheta -= 5;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	return (0);
+}
+
+int		key_sound(int key, void *param)
+{
+	t_m	*m;
+
+	m = (t_m*)param;
+	if (key == 18)// 1
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/ONE_PUNCH.wav &");
+	}
+	else if (key == 19)// 2
+	{
+		system("killall afplay");
+		system("afplay ~/musics/ACDC &");
+	}
+	else if (key == 20)// 3
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/AVICII &");
+	}
+	else if (key == 21)// 4
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/BoW &");
+	}
+	else if (key == 23)// 5
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/NARUTO &");
+	}
+	else if (key == 22)// 6
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/EMINEM &");
+	}
+	else if (key == 26)// 7
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/FUNKYCOPS &");
+	}
+	else if (key == 28)// 8
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/BACH &");
+	}
+	else if (key == 25)// 9
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/ARMSTRONG &");
+	}
+	else if (key == 29)// 0
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/ELECRICITY &");
+	}
+	else if (key == 27)// -
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/SSBM &");
+	}
+	else if (key == 24)// =
+	{
+		system("killall afplay");
+		system("afplay ~/Musics/IRONMAIDEN &");
 	}
 	return (0);
 }
@@ -152,6 +220,10 @@ int		key(int key, void *param)
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
 			key == 91 || key == 82 || key == 65)
 		key_rotate(key, param);
+	else if (key == 18 || key == 19 || key == 20 || key == 21 || key == 23 ||
+			key == 22 || key == 26 || key == 28 || key == 25 || key == 29 ||
+			key == 27 || key == 24)
+		key_sound(key, param);
 	ft_putnbr(key);
 	ft_putchar('|');
 	return (0);
@@ -164,7 +236,7 @@ void	trace1(t_m m)
 	{
 		if (m.x1 > 0 && m.x1 < WIDTH)
 		{
-			m.str[(m.x1 + m.y1 * WIDTH) * 4] = 0;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
 		}
@@ -188,7 +260,7 @@ void	trace2(t_m m)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = 0;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
 		}
 //		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
@@ -247,19 +319,19 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	array = stock(av[1], &m);
-	m.lencolumn = (m.column - 1) * m.gap;
+/*	m.lencolumn = (m.column - 1) * m.gap;
 	m.lenline = (m.line - 1) * m.gap;
 	m.xinit = WIDTH / 2 - m.lencolumn / 2;
 	m.yinit = HEIGHT / 2 - m.lenline / 2;
 	m.x1 = m.xinit;
-	m.y1 = m.yinit;
+	m.y1 = m.yinit;*/
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 	{
 		ft_putstr("Failed to open <FILE>\n");
 		exit(EXIT_FAILURE);
 	}
 	array = fill(array, fd, m);
-	draw(m);
+	paralelle(&m);
 	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, key, &m);
 //	mlx_key_hook(m.win, key_zoom, &m);

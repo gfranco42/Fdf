@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:51:45 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 20:19:28 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/30 18:26:03 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,99 @@
 
 void	xrotate(t_m *m)
 {
-	m->y2 = cos(m->xtheta) * m->y2 - sin(m->xtheta) * m->z;
-	m->z = sin(m->xtheta) * m->y2 + cos(m->xtheta) * m->z;
+	int		y;
+	int		z;
+
+	y = m->y2;
+	z = m->z;
+	m->y2 = y * cos(m->xtheta) - z * sin(m->xtheta);
+	m->z = y * sin(m->xtheta) + z * cos(m->xtheta);
 }
 
 void	yrotate(t_m *m)
 {
-	m->x2 = cos(m->ytheta) * m->x2 + sin(m->xtheta) * m->z;
-	m->z = cos(m->ytheta) * m->z - sin(m->xtheta) * m->x2;
+	int		x;
+	int		z;
+
+	x = m->x2;
+	z = m->z;
+	m->x2 = cos(m->ytheta) * x + sin(m->xtheta) * z;
+	m->z = cos(m->ytheta) * z - sin(m->xtheta) * x;
 }
 
 void	zrotate(t_m *m)
 {
-	m->x2 = cos(m->ztheta) * m->x2 - sin(m->ztheta) * m->y2;
-	m->y2 = sin(m->ztheta) * m->x2 + cos(m->ztheta) * m->y2;
+	int		x;
+	int		y;
+
+	x = m->x2;
+	y = m->y2;
+	m->x2 = cos(m->ztheta) * x - sin(m->ztheta) * y;
+	m->y2 = sin(m->ztheta) * x + cos(m->ztheta) * y;
 }
 
 void	first_x_rotate(t_m *m)
 {
-	m->y1 = cos(m->xtheta) * m->y1 - sin(m->xtheta) * m->z;
-	m->z = sin(m->xtheta) * m->y1 + cos(m->xtheta) * m->z;
+	int		y;
+	int		z;
+
+	y = m->y1;
+	z = m->z;
+	m->y1 = cos(m->xtheta) * y - sin(m->xtheta) * z;
+	m->z = sin(m->xtheta) * y + cos(m->xtheta) * z;
 }
 
 void	first_y_rotate(t_m *m)
 {
-	m->x1 = cos(m->ytheta) * m->x1 + sin(m->xtheta) * m->z;
-	m->z = cos(m->ytheta) * m->z - sin(m->xtheta) * m->x1;
+	int		x;
+	int		z;
+
+	x = m->x1;
+	z = m->z;
+	m->x1 = cos(m->ytheta) * x + sin(m->ytheta) * z;
+	m->z = cos(m->ytheta) * z - sin(m->ytheta) * x;
 }
 
 void	first_z_rotate(t_m *m)
 {
-	m->x1 = cos(m->ztheta) * m->x1 - sin(m->ztheta) * m->y1;
-	m->y1 = sin(m->ztheta) * m->x1 + cos(m->ztheta) * m->y1;
+	int		x;
+	int		y;
+
+	x = m->x1;
+	y = m->y1;
+	m->x1 = cos(m->ztheta) * x - sin(m->ztheta) * y;
+	m->y1 = sin(m->ztheta) * x + cos(m->ztheta) * y;
 }
 
 void	x1rotate(t_m *m)
 {
-	m->y1 = cos(m->xtheta) * m->y1 - sin(m->xtheta) * m->z;
-	m->z = sin(m->xtheta) * m->y1 + cos(m->xtheta) * m->z;
+	int		y;
+	int		z;
+
+	y = m->y1;
+	z = m->z;
+	m->y1 = cos(m->xtheta) * y - sin(m->xtheta) * z;
+	m->z = sin(m->xtheta) * y + cos(m->xtheta) * z;
 }
 
 void	y1rotate(t_m *m)
 {
-	m->x1 = cos(m->ytheta) * m->x1 + sin(m->xtheta) * m->z;
-	m->z = cos(m->ytheta) * m->z - sin(m->xtheta) * m->x1;
+	int		x;
+	int		z;
+
+	x = m->x1;
+	z = m->z;
+	m->x1 = cos(m->ytheta) * x + sin(m->ytheta) * z;
+	m->z = cos(m->ytheta) * z - sin(m->ytheta) * x;
 }
 
 void	z1rotate(t_m *m)
 {
-	m->x1 = cos(m->ztheta) * m->x1 - sin(m->ztheta) * m->y1;
-	m->y1 = sin(m->ztheta) * m->x1 + cos(m->ztheta) * m->y1;
+	int		x;
+	int		y;
+
+	x = m->x1;
+	y = m->y1;
+	m->x1 = cos(m->ztheta) * x - sin(m->ztheta) * y;
+	m->y1 = sin(m->ztheta) * x + cos(m->ztheta) * y;
 }

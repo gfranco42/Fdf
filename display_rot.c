@@ -6,19 +6,19 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 20:32:40 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/11/30 16:54:50 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*void	first_back(t_m *m)
+void	first_back(t_m *m)
 {
-	m->x1 = m->tmpx + WIDTH / 2;
-	m->y1 = m->tmpy + HEIGHT / 2;
+	m->x1 += m->xlen;
+	m->y1 += m->ylen;
 //	draw(*m);
 //	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-}*/
+}
 
 void	back(t_m *m)
 {
@@ -36,7 +36,10 @@ void	init_rot(t_m *m)
 	first_x_rotate(m);
 	first_y_rotate(m);
 	first_z_rotate(m);
+	printf("1C\tx1: %d, y1: %d\n\tx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
+	first_back(m);
 	back(m);
+	printf("2C\tx1: %d, y1: %d\n\tx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
 }
 
 //	voir peut etre pour l'utilisation des matrices...
@@ -50,8 +53,8 @@ void	zero(t_m *m)
 	m->yout = 0 - (m->line - 1) * m->initgap / 2;
 	m->xlen = 0 + m->xinit + (m->column - 1) * m->gap / 2;
 	m->ylen = 0 + m->yinit + (m->line - 1) * m->gap / 2;
-	m->x1 = m->xinit;
-	m->y1 = m->yinit;
+	m->x1 = m->xout;
+	m->y1 = m->yout;
 //	draw(*m);
 //	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
@@ -59,13 +62,14 @@ void	zero(t_m *m)
 void		yincr_rot(t_m *m)
 {
 	m->x2 = m->xout + m->i * m->gap;
+	printf("WTF\n");
 	m->y2 = m->yout + (m->j - 1) * m->gap;
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
 	m->x2 += m->xlen;
 	m->y2 += m->ylen;
-	printf("A x1: %d, y1: %d\nx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
+	printf("A\tx1: %d, y1: %d\n\tx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
 }
 
 void		xincr_rot(t_m *m)
@@ -77,7 +81,7 @@ void		xincr_rot(t_m *m)
 	zrotate(m);
 	m->x2 += m->xlen;
 	m->y2 += m->ylen;
-	printf("B x1: %d, y1: %d\nx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
+	printf("B\tx1: %d, y1: %d\n\tx2: %d, y2: %d\n", m->x1, m->y1, m->x2, m->y2);
 }
 
 
@@ -91,16 +95,18 @@ void		draw_rot(t_m m)
 	{
 		if (m.j != 0)
 		{
+			printf("WOW\n");
 			yincr_rot(&m);
 			trace(m);
 		}
 		xincr_rot(&m);
-		m.green += 20;
+		m.green += 30;
 		trace(m);
 		next(&m);
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
+			printf("YOLO\n");
 			yincr_rot(&m);
 			trace(m);
 		}
@@ -109,7 +115,7 @@ void		draw_rot(t_m m)
 			m.j++;
 			m.i = 0;
 			m.x1 = m.xout;
-			m.y1 = (m.yout + m.j * m.gap) / 2;
+			m.y1 = (m.yout + m.j * m.gap);
 			x1rotate(&m);
 			y1rotate(&m);
 			z1rotate(&m);
