@@ -6,11 +6,17 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/29 17:27:23 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/03 15:02:11 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	fail()
+{
+	ft_putstr("Failed to open <FILE>\n");
+	exit(EXIT_FAILURE);
+}
 
 int		nb_column(char *file)
 {
@@ -22,17 +28,14 @@ int		nb_column(char *file)
 
 	i = 0;
 	nbr = 0;
-//	fd = open(file, O_RDONLY);
 	if ((fd = open(file, O_RDONLY)) == -1)
-	{
-		ft_putstr("Failed to open <FILE>\n");
-		exit(EXIT_FAILURE);
-	}
+		fail();
 	g = get_next_line(fd, &line);
 	while (line[i])
 	{
 		if (line[i] >= '0' && line[i] <= '9')
-			nbr++;
+			if (line[i + 1] == '\0' || line[i + 1] == ' ')
+				nbr++;
 		i++;
 	}
 	free(line);
@@ -51,10 +54,7 @@ int		nb_line(char *file)
 	nbr = 0;
 //	fd = open(file, O_RDONLY);
 	if ((fd = open(file, O_RDONLY)) == -1)
-	{
-		ft_putstr("Failed to open <FILE>\n");
-		exit(EXIT_FAILURE);
-	}
+		fail();
 	while (get_next_line(fd, &line) > 0)
 	{
 		nbr++;

@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/30 18:36:04 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/03 17:09:17 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ int		key_zoom(int key, void *param)
 
 	m = (t_m *)param;
 	if (key == 53)
+	{
+		system("killall afplay");
 		exit(0);
-	if (key == 69)
+	}
+	else if (key == 256)
+		system("killall afplay");
+	else if (key == 69)
 	{
 		m->gap *= 1.1;
 		redraw_zoom_in(m);
 	}
-	if (key == 78)
+	else if (key == 78)
 	{
 		m->gap *= 0.9;
 		redraw_zoom_out(m);
@@ -87,27 +92,19 @@ int		key_rotate(int key, void *param)
 		draw(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}*/
-	if (key == 83)
+	if (key == 84)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->xtheta += 10;
+		m->xtheta += 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
-	else if (key == 84)
+	else if (key == 83)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->xtheta -= 10;
-		draw_rot(*m);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	}
-	else if (key == 86)
-	{
-		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ytheta += 10;
+		m->xtheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -115,15 +112,15 @@ int		key_rotate(int key, void *param)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ytheta -= 10;
+		m->ytheta += 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
-	else if (key == 89)
+	else if (key == 86)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ztheta += 5;
+		m->ytheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -131,7 +128,15 @@ int		key_rotate(int key, void *param)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		m->ztheta -= 5;
+		m->ztheta += 0.1;
+		draw_rot(*m);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	}
+	else if (key == 89)
+	{
+		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
+		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		m->ztheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
@@ -213,7 +218,7 @@ int		key(int key, void *param)
 	m = (t_m*)param;
 	if (key == 123 || key == 124 || key == 125 || key == 126 || key == 71)
 		key_move(key, param);
-	else if (key == 69 || key == 78 || key == 53)
+	else if (key == 69 || key == 78 || key == 53 || key == 256)
 		key_zoom(key, param);
 	else if (key == 34 || key == 35 || key == 8)
 		key_clean(key, param);
@@ -290,7 +295,7 @@ void	trace(t_m m)
 int		main(int ac, char **av)
 {
 	t_m			m;
-	int			**array;
+//	int			**array;
 	int			fd;
 
 	m.ptr = mlx_init();
@@ -318,7 +323,7 @@ int		main(int ac, char **av)
 		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
 		return (0);
 	}
-	array = stock(av[1], &m);
+	m.array = stock(av[1], &m);
 /*	m.lencolumn = (m.column - 1) * m.gap;
 	m.lenline = (m.line - 1) * m.gap;
 	m.xinit = WIDTH / 2 - m.lencolumn / 2;
@@ -330,7 +335,7 @@ int		main(int ac, char **av)
 		ft_putstr("Failed to open <FILE>\n");
 		exit(EXIT_FAILURE);
 	}
-	array = fill(array, fd, m);
+	m.array = fill(fd, m);
 	paralelle(&m);
 	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
 	mlx_key_hook(m.win, key, &m);

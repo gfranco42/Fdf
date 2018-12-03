@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 12:51:45 by gfranco           #+#    #+#             */
-/*   Updated: 2018/11/30 18:26:03 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/03 15:10:06 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	xrotate(t_m *m)
 
 	y = m->y2;
 	z = m->z;
-	m->y2 = y * cos(m->xtheta) - z * sin(m->xtheta);
-	m->z = y * sin(m->xtheta) + z * cos(m->xtheta);
+	m->y2 = cos(m->xtheta) * y - sin(m->xtheta) * z;
+	m->z = sin(m->xtheta) * y + cos(m->xtheta) * z;
 }
 
 void	yrotate(t_m *m)
@@ -30,8 +30,8 @@ void	yrotate(t_m *m)
 
 	x = m->x2;
 	z = m->z;
-	m->x2 = cos(m->ytheta) * x + sin(m->xtheta) * z;
-	m->z = cos(m->ytheta) * z - sin(m->xtheta) * x;
+	m->x2 = cos(m->ytheta) * x + sin(m->ytheta) * z;
+	m->z = cos(m->ytheta) * z - sin(m->ytheta) * x;
 }
 
 void	zrotate(t_m *m)
