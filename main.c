@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/03 17:09:17 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/04 12:59:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,9 +237,9 @@ int		key(int key, void *param)
 void	trace1(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cx && m.y1 < HEIGHT && m.y1 > 0)
+	while (m.i++ <= m.cx/* && m.y1 < HEIGHT && m.y1 > 0*/)
 	{
-		if (m.x1 > 0 && m.x1 < WIDTH)
+		if (m.x1 > 0 && m.x1 < WIDTH && m.y1 < HEIGHT && m.y1 > 0)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
@@ -259,9 +259,9 @@ void	trace1(t_m m)
 void	trace2(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cy && m.x1 < WIDTH && m.x1 > 0)
+	while (m.i++ <= m.cy/* && m.x1 < WIDTH && m.x1 > 0*/)
 	{
-		if (m.y1 < HEIGHT && m.y1 > 0)
+		if (m.y1 < HEIGHT && m.y1 > 0 && m.x1 < WIDTH && m.x1 > 0)
 		{
 			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
@@ -338,6 +338,7 @@ int		main(int ac, char **av)
 	m.array = fill(fd, m);
 	paralelle(&m);
 	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
+//`	mlx_hook(m.ptr, KeyPress, XKeyPressedEvent, key, &m)
 	mlx_key_hook(m.win, key, &m);
 //	mlx_key_hook(m.win, key_zoom, &m);
 //	mlx_key_hook(m.win, key_move, &m);

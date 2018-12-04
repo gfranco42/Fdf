@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/03 18:15:41 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/04 13:00:40 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	zero(t_m *m)
 {
 	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	m->xout = 0 - (m->column - 1) * m->initgap / 2;
-	m->yout = 0 - (m->line - 1) * m->initgap / 2;
+	m->xout = 0 - (m->column - 1) * m->gap / 2;
+	m->yout = 0 - (m->line - 1) * m->gap / 2;
 	m->xlen = 0 + m->xinit + (m->column - 1) * m->gap / 2;
 	m->ylen = 0 + m->yinit + (m->line - 1) * m->gap / 2;
 	m->x1 = m->xout;
