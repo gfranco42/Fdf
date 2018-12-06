@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/04 12:59:46 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/06 19:59:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,10 +338,8 @@ int		main(int ac, char **av)
 	m.array = fill(fd, m);
 	paralelle(&m);
 	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
-//`	mlx_hook(m.ptr, KeyPress, XKeyPressedEvent, key, &m)
+//	mlx_hook(m.ptr, 2, 0, key, &m);
 	mlx_key_hook(m.win, key, &m);
-//	mlx_key_hook(m.win, key_zoom, &m);
-//	mlx_key_hook(m.win, key_move, &m);
 //	mlx_mouse_hook(m.win, mouse, &m);
 	mlx_loop(m.ptr);
 	return (0);

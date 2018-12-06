@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:45:46 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/03 16:37:19 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/06 18:08:05 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int		**fill(int fd, t_m m)
 		while (arr[m.i])
 		{
 			m.array[m.j][m.i] = ft_atoi(arr[m.i]);
-			printf("array[%d][%d] = %d\n", m.j, m.i, m.array[m.j][m.i]);
 			free(arr[m.i]);
 			m.i++;
 		}

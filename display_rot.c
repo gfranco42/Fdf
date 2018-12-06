@@ -3,130 +3,129 @@
 /*                                                        :::      ::::::::   */
 /*   display_rot.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/04 13:00:40 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/06 19:47:02 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	first_back(t_m *m)
-{
-	m->x1 += m->xlen;
-	m->y1 += m->ylen;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-}
-
-void	back(t_m *m)
-{
-	m->xinit += m->xlen;
-	m->yinit += m->ylen;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-}
-
-void	zero(t_m *m)
-{
-	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	m->xout = 0 - (m->column - 1) * m->gap / 2;
-	m->yout = 0 - (m->line - 1) * m->gap / 2;
-	m->xlen = 0 + m->xinit + (m->column - 1) * m->gap / 2;
-	m->ylen = 0 + m->yinit + (m->line - 1) * m->gap / 2;
-	m->x1 = m->xout;
-	m->y1 = m->yout;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-}
-
-void	init_rot(t_m *m)
-{
-	m->i = 0;
-	m->j = 0;
-	zero(m);
-	first_x_rotate(m);
-	first_y_rotate(m);
-	first_z_rotate(m);
-	m->z = m->array[0][0];
-//	printf("1C\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
-	first_back(m);
-	back(m);
-//	printf("2C\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
-}
-
-//	voir peut etre pour l'utilisation des matrices...
-//	voir peut etre pour la valeur de x1 y1 quand je relie...
-
-void		yincr_rot(t_m *m)
+int		next_x(t_m *m)
 {
 	m->x2 = m->xout + m->i * m->gap;
-//	printf("WTF\n");
-	m->y2 = m->yout + (m->j - 1) * m->gap;
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
 	m->z = m->array[m->j][m->i + 1];
 	m->x2 += m->xlen;
-	m->y2 += m->ylen;
-//	printf("A\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
+	return (m->x2);
 }
 
-void		xincr_rot(t_m *m)
+int		next_y(t_m *m)
 {
-	m->x2 = m->xout + (m->i + 1) * m->gap;
 	m->y2 = m->yout + m->j * m->gap;
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
 	m->z = m->array[m->j][m->i + 1];
-	m->x2 += m->xlen;
-	m->y2 += m->ylen;
-//	printf("B\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
+	m->y2 += m->xlen;
+	return (m->y2);
 }
 
-
-
-void		draw_rot(t_m m)
+int		***make_tab(t_m m)
 {
+	int		***tab;
+
+	m.j = 0;
+	if (!(tab = (int***)malloc(sizeof(*tab) * m.line)))
+		exit(0);
+	while (m.line-- > 0)
+	{
+		if (!(tab[m.j] = (int**)malloc(sizeof(*tab) * 2)))
+			exit(0);
+		if (!(tab[m.j][0] = (int*)malloc(sizeof(*tab) * m.column)))
+			exit(0);
+		if (!(tab[m.j][1] = (int*)malloc(sizeof(*tab) * m.column)))
+			exit(0);
+		m.j++;
+	}
+	return (tab);
+}
+
+int		***fill_tab(t_m m)
+{
+	int		***tab;
+
 	init_rot(&m);
+	tab = make_tab(m);
+	tab[m.j][0][m.i] = m.x1;
+	tab[m.j][1][m.i] = m.y1;
+	m.i++;
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
-		m.z = m.array[m.j][m.i + 1];
-		if (m.j != 0)
-		{
-//			printf("WOW\n");
-			yincr_rot(&m);
-			trace(m);
-		}
-		xincr_rot(&m);
-		m.green += 30;
-		trace(m);
-		next(&m);
-		m.i++;
-		if (m.i == m.column - 1 && m.j != 0)
-		{
-//			printf("YOLO\n");
-			yincr_rot(&m);
-			trace(m);
-		}
+		tab[m.j][0][m.i] = next_x(&m);
+		tab[m.j][1][m.i] = next_y(&m);
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
 			m.j++;
 			m.i = 0;
 			m.z = m.array[m.j][m.i + 1];
-			m.x1 = m.xout;
-			m.y1 = (m.yout + m.j * m.gap);
-			x1rotate(&m);
-			y1rotate(&m);
-			z1rotate(&m);
-			m.x1 += m.xlen;
-			m.y1 += m.ylen;
+			m.x2 = m.xout;
+			m.y2 = (m.yout + m.j * m.gap);
+			xrotate(&m);
+			yrotate(&m);
+			zrotate(&m);
+			m.x2 += m.xlen;
+			m.y2 += m.ylen;
+		}
+		m.i++;
+	}
+	return (tab);
+}
+
+void	vert_value(t_m *m, int ***tab)
+{
+	m->x1 = tab[m->j][0][m->i];
+	m->y1 = tab[m->j][1][m->i];
+	m->x2 = tab[m->j - 1][0][m->i];
+	m->y2 = tab[m->j - 1][1][m->i];
+//	printf("x1: %d, y1: %d, x2: %d, y2: %d", m->x1, m->y1, m->x2, m->y2);
+}
+
+void	hori_value(t_m *m, int ***tab)
+{
+	m->x1 = tab[m->j][0][m->i];
+	m->y1 = tab[m->j][1][m->i];
+	m->x2 = tab[m->j][0][m->i + 1];
+	m->y2 = tab[m->j][1][m->i + 1];
+//	printf("x1: %d, y1: %d, x2: %d, y2: %d", m->x1, m->y1, m->x2, m->y2);
+}
+
+void	draw_rot(t_m m)
+{
+	int		***tab;
+
+	tab = fill_tab(m);
+	printf(", tab[0][0][0]: %d, tab[0][1][0]: %d\n, tab[0][0][1]: %d, tab[0][1][1]: %d\n, tab[0][0][2]: %d, tab[0][1][2]: %d\n, tab[0][0][3]: %d, tab[0][1][3]: %d\n, tab[1][0][0]: %d, tab[1][1][0]: %d\n, tab[1][0][1]: %d, tab[1][1][1]: %d\n, tab[1][0][2]: %d, tab[1][1][2]: %d\n, tab[1][0][3]: %d, tab[1][1][3]: %d\n, tab[2][0][0]: %d, tab[2][1][0]: %d\n, tab[2][0][1]: %d, tab[2][1][1]: %d\n, tab[2][0][2]: %d, tab[2][1][2]: %d\n, tab[2][0][3]: %d, tab[2][1][3]: %d\n", tab[0][0][0], tab[0][1][0], tab[0][0][1], tab[0][1][1], tab[0][0][2], tab[0][1][2], tab[0][0][3], tab[0][1][3], tab[1][0][0], tab[1][1][0], tab[1][0][1], tab[1][1][1], tab[1][0][2], tab[1][1][2], tab[1][0][3], tab[1][1][3], tab[2][0][0], tab[2][1][0], tab[2][0][1], tab[2][1][1], tab[2][0][2], tab[2][1][2], tab[2][0][3], tab[2][1][3]);
+	while (m.i + 1 < m.column - 1 || m.j + 1 < m.line - 1)
+	{
+		if (m.j != 0)
+		{
+			vert_value(&m, tab);
+			trace(m);
+		}
+		if (m.i + 1 <= m.column - 1)
+		{
+			hori_value(&m, tab);
+			trace(m);
+		}
+		m.i++;
+		if (m.i + 1 > m.column - 1)
+		{
+			m.j++;
+			m.i = 0;
 		}
 	}
 }
-
-
-// REFAIRE entierement l'algo de tracage avec un tableau qui transforme les valeurs

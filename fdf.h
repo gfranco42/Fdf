@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/03 16:36:23 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/06 18:07:05 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		trace(t_m m);
 void		draw(t_m m);
 void		draw_rot(t_m m);
 void		init_variable(t_m *m);
+void		init_rot(t_m *m);
 void		redraw_move(t_m *m, float a, float b);
 void		redraw_zoom_in(t_m *m);
 void		redraw_zoom_out(t_m *m);
