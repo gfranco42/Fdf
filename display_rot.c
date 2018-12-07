@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/07 17:50:29 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/07 18:31:20 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 double	next_x(t_m *m)
 {
 	m->x2 = m->xout + m->i * m->gap;
+	m->z = m->array[m->j][m->i];
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
-	m->z = m->array[m->j][m->i];
 	m->x2 += m->xlen;
 	return (m->x2);
 }
@@ -26,10 +26,10 @@ double	next_x(t_m *m)
 double	next_y(t_m *m)
 {
 	m->y2 = m->yout + m->j * m->gap;
+	m->z = m->array[m->j][m->i];
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
-	m->z = m->array[m->j][m->i];
 	m->y2 += m->ylen;
 	return (m->y2);
 }
