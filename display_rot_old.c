@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/06 18:05:19 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:20:31 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@ void	first_back(t_m *m)
 {
 	m->x1 += m->xlen;
 	m->y1 += m->ylen;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	back(t_m *m)
 {
 	m->xinit += m->xlen;
 	m->yinit += m->ylen;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	zero(t_m *m)
@@ -38,8 +34,6 @@ void	zero(t_m *m)
 	m->ylen = 0 + m->yinit + (m->line - 1) * m->gap / 2;
 	m->x1 = m->xout;
 	m->y1 = m->yout;
-//	draw(*m);
-//	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 }
 
 void	init_rot(t_m *m)
@@ -51,14 +45,10 @@ void	init_rot(t_m *m)
 	first_y_rotate(m);
 	first_z_rotate(m);
 	m->z = m->array[0][0];
-//	printf("1C\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
 	first_back(m);
 	back(m);
-//	printf("2C\tx1: %d, y1: %d\n\tx2: %d, y2: %d, z: %d\n", m->x1, m->y1, m->x2, m->y2, m->z);
 }
 
-//	voir peut etre pour l'utilisation des matrices...
-//	voir peut etre pour la valeur de x1 y1 quand je relie...
 
 /*void		yincr_rot(t_m *m)
 {

@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/07 16:49:06 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:50:29 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ double	***fill_tab(t_m m)
 	{
 		m.tab[m.j][0][m.i] = next_x(&m);
 		m.tab[m.j][1][m.i] = next_y(&m);
+		printf("1\txtheta: %f, ytheta: %f, ztheta: %f\n", m.xtheta, m.ytheta, m.ztheta);
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
 			m.j++;
@@ -75,6 +76,7 @@ double	***fill_tab(t_m m)
 			zrotate(&m);
 			m.x2 += m.xlen;
 			m.y2 += m.ylen;
+			printf("2\txtheta: %f, ytheta: %f, ztheta: %f\n", m.xtheta, m.ytheta, m.ztheta);
 			m.tab[m.j][0][m.i] = m.x2;
 			m.tab[m.j][1][m.i] = m.y2;
 		}
@@ -84,6 +86,7 @@ double	***fill_tab(t_m m)
 	{
 		m.tab[m.j][0][m.i] = next_x(&m);
 		m.tab[m.j][1][m.i] = next_y(&m);
+		printf("3\txtheta: %f, ytheta: %f, ztheta: %f\n", m.xtheta, m.ytheta, m.ztheta);
 	}
 	return (m.tab);
 }
@@ -108,7 +111,7 @@ void	draw_rot(t_m m)
 {
 	m.tab = fill_tab(m);
 	printf(", m.tab[0][0][0]: %f, m.tab[0][1][0]: %f\n, m.tab[0][0][1]: %f, m.tab[0][1][1]: %f\n, m.tab[0][0][2]: %f, m.tab[0][1][2]: %f\n, m.tab[0][0][3]: %f, m.tab[0][1][3]: %f\n, m.tab[1][0][0]: %f, m.tab[1][1][0]: %f\n, m.tab[1][0][1]: %f, m.tab[1][1][1]: %f\n, m.tab[1][0][2]: %f, m.tab[1][1][2]: %f\n, m.tab[1][0][3]: %f, m.tab[1][1][3]: %f\n, m.tab[2][0][0]: %f, m.tab[2][1][0]: %f\n, m.tab[2][0][1]: %f, m.tab[2][1][1]: %f\n, m.tab[2][0][2]: %f, m.tab[2][1][2]: %f\n, m.tab[2][0][3]: %f, m.tab[2][1][3]: %f\n", m.tab[0][0][0], m.tab[0][1][0], m.tab[0][0][1], m.tab[0][1][1], m.tab[0][0][2], m.tab[0][1][2], m.tab[0][0][3], m.tab[0][1][3], m.tab[1][0][0], m.tab[1][1][0], m.tab[1][0][1], m.tab[1][1][1], m.tab[1][0][2], m.tab[1][1][2], m.tab[1][0][3], m.tab[1][1][3], m.tab[2][0][0], m.tab[2][1][0], m.tab[2][0][1], m.tab[2][1][1], m.tab[2][0][2], m.tab[2][1][2], m.tab[2][0][3], m.tab[2][1][3]);
-	while (m.i < m.column - 1 || m.j + 1 < m.line - 1)
+	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		if (m.j != 0)
 		{
