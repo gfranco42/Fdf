@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/10 18:07:07 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/10 18:26:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		***fill_tab(t_m m)
 	m.tab = make_tab(m);
 	m.tab[m.j][0][m.i] = m.x1;
 	m.tab[m.j][1][m.i] = m.y1;
-	printf("1\tx: %d, y: %d\n", m.x1, m.y1);
 	m.i++;
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
@@ -67,7 +66,6 @@ int		***fill_tab(t_m m)
 		next_y(&m);
 		m.tab[m.j][0][m.i] = m.x2;
 		m.tab[m.j][1][m.i] = m.y2;
-		printf("\tm.tab[x]: %d, mtab[y]: %d\n", m.tab[m.j][0][m.i], m.tab[m.j][0][m.i]);
 		if (m.i == m.column - 1 && m.j != m.line - 1)
 		{
 			m.i = 0;
@@ -114,7 +112,6 @@ void	hori_value(t_m *m)
 void	draw_rot(t_m m)
 {
 	m.tab = fill_tab(m);
-	printf(", m.tab[0][0][0]: %d, m.tab[0][1][0]: %d\n, m.tab[0][0][1]: %d, m.tab[0][1][1]: %d\n, m.tab[0][0][2]: %d, m.tab[0][1][2]: %d\n, m.tab[0][0][3]: %d, m.tab[0][1][3]: %d\n, m.tab[1][0][0]: %d, m.tab[1][1][0]: %d\n, m.tab[1][0][1]: %d, m.tab[1][1][1]: %d\n, m.tab[1][0][2]: %d, m.tab[1][1][2]: %d\n, m.tab[1][0][3]: %d, m.tab[1][1][3]: %d\n, m.tab[2][0][0]: %d, m.tab[2][1][0]: %d\n, m.tab[2][0][1]: %d, m.tab[2][1][1]: %d\n, m.tab[2][0][2]: %d, m.tab[2][1][2]: %d\n, m.tab[2][0][3]: %d, m.tab[2][1][3]: %d\n", m.tab[0][0][0], m.tab[0][1][0], m.tab[0][0][1], m.tab[0][1][1], m.tab[0][0][2], m.tab[0][1][2], m.tab[0][0][3], m.tab[0][1][3], m.tab[1][0][0], m.tab[1][1][0], m.tab[1][0][1], m.tab[1][1][1], m.tab[1][0][2], m.tab[1][1][2], m.tab[1][0][3], m.tab[1][1][3], m.tab[2][0][0], m.tab[2][1][0], m.tab[2][0][1], m.tab[2][1][1], m.tab[2][0][2], m.tab[2][1][2], m.tab[2][0][3], m.tab[2][1][3]);
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		if (m.j != 0)

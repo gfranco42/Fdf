@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/06 19:59:16 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/10 18:31:54 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,7 @@ int		key_rotate(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
-/*	if (key == 65)
-	{
-		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		back(m);
-		draw(*m);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	}
-	if (key == 82)
-	{
-		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-		zero(m);
-		draw(*m);
-		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
-	}*/
+
 	if (key == 84)
 	{
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
@@ -307,7 +292,7 @@ int		main(int ac, char **av)
 	m.gap = m.initgap;
 	m.savegap = m.initgap;
 	m.red = 0xff;
-	m.green = 0;
+	m.green = 0xff;
 	m.blue = 0xff;
 	m.xtheta = 0;
 	m.ytheta = 0;
@@ -338,8 +323,8 @@ int		main(int ac, char **av)
 	m.array = fill(fd, m);
 	paralelle(&m);
 	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
-//	mlx_hook(m.ptr, 2, 0, key, &m);
-	mlx_key_hook(m.win, key, &m);
+	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
+//	mlx_key_hook(m.win, key, &m);
 //	mlx_mouse_hook(m.win, mouse, &m);
 	mlx_loop(m.ptr);
 	return (0);

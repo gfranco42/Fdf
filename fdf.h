@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/10 17:43:57 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/10 18:21:55 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include "./Libft/libft.h"
-# include "colors.h"
+# include "macros.h"
 # include <math.h>
 
 # define WIDTH 1000
