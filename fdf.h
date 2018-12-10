@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/07 18:32:11 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/10 17:43:57 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_m
 	int		*win;
 	char	*str;
 	int		**array;
-	double	***tab;
+	int		***tab;
 	char	red;
 	char	green;
 	char	blue;
@@ -64,11 +64,11 @@ typedef struct		s_m
 	double	xtheta;
 	double	ytheta;
 	double	ztheta;
-	double	x1;
-	double	y1;
-	double	x2;
-	double	y2;
-	double	z;
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
+	int		z;
 	int		i;
 	int		j;
 	int		k;

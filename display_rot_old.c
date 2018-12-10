@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/07 17:20:31 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/10 16:21:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	init_rot(t_m *m)
 	m->i = 0;
 	m->j = 0;
 	zero(m);
+	m->z = m->array[0][0];
 	first_x_rotate(m);
 	first_y_rotate(m);
 	first_z_rotate(m);
-	m->z = m->array[0][0];
 	first_back(m);
 	back(m);
 }
