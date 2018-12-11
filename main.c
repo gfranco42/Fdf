@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/10 18:31:54 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/11 13:36:04 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int		key_move(int key, void *param)
 
 	m = (t_m *)param;
 	if (key == 123)
-		redraw_move(m, -20, 0);
-	else if(key == 124)
 		redraw_move(m, 20, 0);
+	else if(key == 124)
+		redraw_move(m, -20, 0);
 	else if (key == 126)
-		redraw_move(m, 0, -20);
-	else if (key == 125)
 		redraw_move(m, 0, 20);
+	else if (key == 125)
+		redraw_move(m, 0, -20);
 	else if (key == 71)
 		paralelle(m);
 	return (0);
@@ -133,7 +133,8 @@ int		key_sound(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
-	if (key == 18)// 1
+	(void)key;
+	/*if (key == 18)// 1
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/ONE_PUNCH.wav &");
@@ -192,7 +193,7 @@ int		key_sound(int key, void *param)
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/IRONMAIDEN &");
-	}
+	}*/
 	return (0);
 }
 
@@ -214,15 +215,13 @@ int		key(int key, void *param)
 			key == 22 || key == 26 || key == 28 || key == 25 || key == 29 ||
 			key == 27 || key == 24)
 		key_sound(key, param);
-	ft_putnbr(key);
-	ft_putchar('|');
 	return (0);
 }
 
 void	trace1(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cx/* && m.y1 < HEIGHT && m.y1 > 0*/)
+	while (m.i++ <= m.cx)
 	{
 		if (m.x1 > 0 && m.x1 < WIDTH && m.y1 < HEIGHT && m.y1 > 0)
 		{
@@ -230,7 +229,6 @@ void	trace1(t_m m)
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
 		}
-//		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
 		m.x1 = m.x1 > m.x2 ? (m.x1 - 1) : (m.x1 + 1);
 		m.ex -= m.dy;
 		if (m.ex < 0)
@@ -244,7 +242,7 @@ void	trace1(t_m m)
 void	trace2(t_m m)
 {
 	m.i = 0;
-	while (m.i++ <= m.cy/* && m.x1 < WIDTH && m.x1 > 0*/)
+	while (m.i++ <= m.cy)
 	{
 		if (m.y1 < HEIGHT && m.y1 > 0 && m.x1 < WIDTH && m.x1 > 0)
 		{
@@ -252,7 +250,6 @@ void	trace2(t_m m)
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
 			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
 		}
-//		mlx_pixel_put(m.ptr, m.win, m.x1, m.y1, color);
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
 		m.ey -= m.dx;
 		if (m.ey < 0)
