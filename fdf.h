@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/17 12:56:56 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:57:31 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@
 # define MIN_Z -1000
 
 
-
-typedef struct		s_color
-{
-	char	blue;
-	char	green;
-	char	red;
-	char	dblue;
-	char	dgreen;
-	char	dred;
-}					t_color;
-
 typedef struct		s_m
 {
 	void	*ptr;
@@ -47,6 +36,12 @@ typedef struct		s_m
 	char	*str;
 	int		**array;
 	int		***tab;
+	char	blue;
+	char	green;
+	char	red;
+	char	dblue;
+	char	dgreen;
+	char	dred;
 	int		bpp;
 	int		s_l;
 	int		endian;
@@ -81,32 +76,27 @@ typedef struct		s_m
 	int		k;
 }					t_m;
 
-typedef struct		s_all
-{
-	t_color		*color;
-	t_m			*m;
-}					t_all;
 
 int			**stock(char *file, t_m *m);
 int			**fill(int fd, t_m m);
 //int			**fill2(m, int fd);
-void		trace(t_m m, t_color *color);
+void		trace(t_m m);
 void		draw(t_m m);
-void		draw_rot(t_m m, t_color *color);
+void		draw_rot(t_m m);
 void		init_variable(t_m *m);
 void		init_rot(t_m *m);
-void		redraw_move(t_m *m, float a, float b, t_color *color);
-void		redraw_zoom_in(t_m *m, t_color *color);
-void		redraw_zoom_out(t_m *m, t_color *color);
-void		redraw_relief(t_m *m, t_color *color);
+void		redraw_move(t_m *m, float a, float b);
+void		redraw_zoom_in(t_m *m);
+void		redraw_zoom_out(t_m *m);
+void		redraw_relief(t_m *m);
 void		change_relief_up(t_m *m);
 void		change_relief_down(t_m *m);
 void		zero(t_m *m);
 void		back(t_m *m);
 void		next(t_m *m);
-void		iso(t_m *m, t_color *color);
-void		parallele(t_m *m, t_color *color);
-void		conique(t_m *m, t_color *color);
+void		iso(t_m *m);
+void		parallele(t_m *m);
+void		conique(t_m *m);
 void		xrotate(t_m *m);
 void		yrotate(t_m *m);
 void		zrotate(t_m *m);

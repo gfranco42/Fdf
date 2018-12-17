@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/17 12:47:43 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:45:30 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,66 +101,29 @@ void	hori_value(t_m *m)
 	m->y2 = m->tab[m->j][1][m->i + 1];
 }
 
-void	draw_rot(t_m m, t_color *color)
+void	draw_rot(t_m m)
 {
 //	int		i = 0;
 //	int		j = 0;
 	m.tab = fill_tab(m);
-/*	while (i < m.line - 1)
-	{
-		while (j < m.column - 1)
-		{
-			printf("\ttab[%d][0][%d]: %d, tab[%d][0][%d]: %d\n", i, j, m.tab[i][0][j], i, j, m.tab[i][1][j]);
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	printf("\n\n");*/
-	/*	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][0], m.tab[0][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][0], m.tab[0][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][1], m.tab[0][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][1], m.tab[0][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][2], m.tab[0][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][2], m.tab[0][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][3], m.tab[0][1][3]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[0][0][3], m.tab[0][1][3]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][0], m.tab[1][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][0], m.tab[1][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][1], m.tab[1][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][1], m.tab[1][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][2], m.tab[1][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][2], m.tab[1][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][3], m.tab[1][1][3]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[1][0][3], m.tab[1][1][3]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][0], m.tab[2][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][0], m.tab[2][1][0]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][1], m.tab[2][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][1], m.tab[2][1][1]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][2], m.tab[2][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][2], m.tab[2][1][2]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][3], m.tab[2][1][3]);
-	printf("\ttab[x]: %d, tab[y]: %d\n", m.tab[2][0][3], m.tab[2][1][3]);*/
+
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		if (m.j != 0)
 		{
 			vert_value(&m);
-			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
-			trace(m, color);
+			trace(m);
 		}
 		if (m.i < m.column - 1)
 		{
 			hori_value(&m);
-			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
-			trace(m, color);
+			trace(m);
 		}
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
 			vert_value(&m);
-			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
-			trace(m, color);
+			trace(m);
 		}
 		if (m.i >= m.column - 1 && m.j < m.line - 1)
 		{
