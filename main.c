@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/11 13:36:04 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/17 13:30:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,20 @@ int		key_zoom(int key, void *param)
 	}
 	else if (key == 78)
 	{
-		m->gap *= 0.9;
+		all->m->gap *= 0.9;
 		redraw_zoom_out(m);
+	}
+	else if (key == 88)
+	{
+		m->relief += 0.3;
+		printf("relief: %f`\n", m->relief);
+		redraw_relief(m);
+	}
+	else if (key == 85)
+	{
+		m->relief -= 0.3;
+		printf("relief: %f\n", m->relief);
+		redraw_relief(m);
 	}
 	return (0);
 }
@@ -53,7 +65,7 @@ int		key_move(int key, void *param)
 	else if (key == 125)
 		redraw_move(m, 0, -20);
 	else if (key == 71)
-		paralelle(m);
+		parallele(m);
 	return (0);
 }
 
@@ -65,8 +77,8 @@ int		key_clean(int key, void *param)
 	if (key == 34)// iso
 		iso(m);
 	else if (key == 35)// para
-		paralelle(m);
-	else if (key == 8)// conique
+		parallele(m);
+	else if (key == 31)// conique
 		conique(m);
 	return (0);
 }
@@ -82,7 +94,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta += 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	else if (key == 83)
@@ -90,7 +102,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta -= 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	else if (key == 87)
@@ -98,7 +110,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta += 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	else if (key == 86)
@@ -106,7 +118,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta -= 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	else if (key == 91)
@@ -114,7 +126,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta += 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	else if (key == 89)
@@ -122,7 +134,7 @@ int		key_rotate(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta -= 0.1;
-		draw_rot(*m);
+		draw_rot(m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	}
 	return (0);
@@ -188,12 +200,25 @@ int		key_sound(int key, void *param)
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/SSBM &");
-	}
-	else if (key == 24)// =
+	 if (key == 24)// =
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/IRONMAIDEN &");
 	}*/
+	return (0);
+}
+
+int		key_color(int key, void *param)
+{
+	t_m	*m;
+
+	m = (t_m*)param;
+	if (key == 15)// red
+	{
+		m->dgreen = 255 - m->dgreen;
+		m->dblue = 255 - m->dblue;
+		redraw_relief(m);
+	}
 	return (0);
 }
 
@@ -204,9 +229,9 @@ int		key(int key, void *param)
 	m = (t_m*)param;
 	if (key == 123 || key == 124 || key == 125 || key == 126 || key == 71)
 		key_move(key, param);
-	else if (key == 69 || key == 78 || key == 53 || key == 256)
+	else if (key == 69 || key == 78 || key == 53 || key == 256 || key == 88 || key == 85)
 		key_zoom(key, param);
-	else if (key == 34 || key == 35 || key == 8)
+	else if (key == 34 || key == 35 || key == 31)
 		key_clean(key, param);
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
 			key == 91 || key == 82 || key == 65)
@@ -215,19 +240,26 @@ int		key(int key, void *param)
 			key == 22 || key == 26 || key == 28 || key == 25 || key == 29 ||
 			key == 27 || key == 24)
 		key_sound(key, param);
+	else if (key == 15 || key == 5 || key == 11)
+		key_color(key, param);
+	ft_putnbr(key);
+	ft_putchar('|');
 	return (0);
 }
 
-void	trace1(t_m m)
+void	trace1(t_m m, t_color *color)
 {
 	m.i = 0;
 	while (m.i++ <= m.cx)
 	{
 		if (m.x1 > 0 && m.x1 < WIDTH && m.y1 < HEIGHT && m.y1 > 0)
 		{
-			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4] = color->blue;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = color->green;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = color->red;
+			color->blue += color->dblue;
+			color->green += color->dgreen;
+			color->red += color->dred;
 		}
 		m.x1 = m.x1 > m.x2 ? (m.x1 - 1) : (m.x1 + 1);
 		m.ex -= m.dy;
@@ -239,16 +271,19 @@ void	trace1(t_m m)
 	}
 }
 
-void	trace2(t_m m)
+void	trace2(t_m m, t_color *color)
 {
 	m.i = 0;
 	while (m.i++ <= m.cy)
 	{
 		if (m.y1 < HEIGHT && m.y1 > 0 && m.x1 < WIDTH && m.x1 > 0)
 		{
-			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4] = color->blue;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = color->green;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = color->red;
+			color->blue += color->dblue;
+			color->green += color->dgreen;
+			color->red += color->dred;
 		}
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
 		m.ey -= m.dx;
@@ -260,7 +295,7 @@ void	trace2(t_m m)
 	}
 }
 
-void	trace(t_m m)
+void	trace(t_m m, t_color *color)
 {
 	m.ex = abs(m.x2 - m.x1);
 	m.ey = abs(m.y2 - m.y1);
@@ -269,28 +304,43 @@ void	trace(t_m m)
 	m.cx = m.ex;
 	m.cy = m.ey;
 	if (m.cx > m.cy)
-		trace1(m);
+		trace1(m, color);
 	else
-		trace2(m);
+		trace2(m, color);
 }
 
 int		main(int ac, char **av)
 {
 	t_m			m;
-//	int			**array;
+	t_color		color;
+	t_all		all;
 	int			fd;
 
-	m.ptr = mlx_init();
+//	printf("\t1\n");
+	if (!(m.ptr = mlx_init()))
+	{
+//		printf("\t2\n");
+		exit(0);
+	}
+//	printf("\t3\n");
 	m.img = mlx_new_image(m.ptr, WIDTH, HEIGHT);
+//	printf("\t4\n");
 	m.str = mlx_get_data_addr(m.img, &(m.bpp), &(m.s_l), &(m.endian));
+//	printf("\t5\n");
 	m.win = mlx_new_window(m.ptr, WIDTH, HEIGHT, "YOLO");
+//	printf("\t6\n");
 
 	m.initgap = 50;
 	m.gap = m.initgap;
 	m.savegap = m.initgap;
-	m.red = 0xff;
-	m.green = 0xff;
-	m.blue = 0xff;
+	m.relief = 1;
+	m.tab = NULL;
+	color.red = 0x7f;
+	color.green = 0x7f;
+	color.blue = 0x7f;
+	color.dred = 7;
+	color.dgreen = 7;
+	color.dblue = 7;
 	m.xtheta = 0;
 	m.ytheta = 0;
 	m.ztheta = 0;
@@ -305,7 +355,9 @@ int		main(int ac, char **av)
 		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
 		return (0);
 	}
+//	printf("\t7\n");
 	m.array = stock(av[1], &m);
+//	printf("\t38\n");
 /*	m.lencolumn = (m.column - 1) * m.gap;
 	m.lenline = (m.line - 1) * m.gap;
 	m.xinit = WIDTH / 2 - m.lencolumn / 2;
@@ -317,12 +369,16 @@ int		main(int ac, char **av)
 		ft_putstr("Failed to open <FILE>\n");
 		exit(EXIT_FAILURE);
 	}
+//	printf("\t39\n");
 	m.array = fill(fd, m);
-	paralelle(&m);
-	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
-	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
-//	mlx_key_hook(m.win, key, &m);
-//	mlx_mouse_hook(m.win, mouse, &m);
+//	printf("\t49\n");
+	parallele(&m, &color);
+//	printf("\t55\n");
+//	mlx_expose_hook(m.ptr, paralelle, &m);
+//	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
+	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &all);
+//	printf("56");
 	mlx_loop(m.ptr);
+//	printf("57");
 	return (0);
 }

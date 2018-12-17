@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/11 14:02:39 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/17 12:47:43 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	next_y(t_m *m)
 {
 	m->x2 = m->xout + m->i * m->gap;
 	m->y2 = m->yout + m->j * m->gap;
-	m->z = m->array[m->j][m->i];
+	m->z = m->array[m->j][m->i] * m->relief;
+	m->z = m->z >= MAX_Z ? 1000 : m->z;
+	m->z = m->z <= MIN_Z ? -1000 : m->z;
 	xrotate(m);
 	yrotate(m);
 	zrotate(m);
@@ -58,7 +60,9 @@ int		***fill_tab(t_m m)
 		{
 			m.i = 0;
 			m.j++;
-			m.z = m.array[m.j][m.i];
+			m.z = m.array[m.j][m.i] * m.relief;
+			m.z = m.z >= MAX_Z ? 1000 : m.z;
+			m.z = m.z <= MIN_Z ? -1000 : m.z;
 			m.x2 = m.xout;
 			m.y2 = (m.yout + m.j * m.gap);
 			xrotate(&m);
@@ -97,7 +101,7 @@ void	hori_value(t_m *m)
 	m->y2 = m->tab[m->j][1][m->i + 1];
 }
 
-void	draw_rot(t_m m)
+void	draw_rot(t_m m, t_color *color)
 {
 //	int		i = 0;
 //	int		j = 0;
@@ -142,18 +146,21 @@ void	draw_rot(t_m m)
 		if (m.j != 0)
 		{
 			vert_value(&m);
-			trace(m);
+			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
+			trace(m, color);
 		}
 		if (m.i < m.column - 1)
 		{
 			hori_value(&m);
-			trace(m);
+			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
+			trace(m, color);
 		}
 		m.i++;
 		if (m.i == m.column - 1 && m.j != 0)
 		{
 			vert_value(&m);
-			trace(m);
+			printf("xinit: %f, yinit: %f\n", m.xinit, m.yinit);
+			trace(m, color);
 		}
 		if (m.i >= m.column - 1 && m.j < m.line - 1)
 		{
