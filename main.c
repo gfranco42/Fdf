@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/17 18:32:52 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/18 14:04:55 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ int		key_zoom(int key, void *param)
 	else if (key == 88)
 	{
 		m->relief += 0.3;
-		printf("relief: %f`\n", m->relief);
 		redraw_relief(m);
 	}
 	else if (key == 85)
 	{
 		m->relief -= 0.3;
-		printf("relief: %f\n", m->relief);
 		redraw_relief(m);
 	}
 	return (0);
@@ -67,6 +65,10 @@ int		key_move(int key, void *param)
 	else if (key == 71)
 	{
 		m->relief = 1;
+		m->alpha = 0;
+		m->blue = 0xff;
+		m->green = 0xff;
+		m->red = 0xff;
 		parallele(m);
 	}
 	return (0);
@@ -146,8 +148,7 @@ int		key_sound(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
-	(void)key;
-	/*if (key == 18)// 1
+	if (key == 18)// 1
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/ONE_PUNCH.wav &");
@@ -201,11 +202,12 @@ int		key_sound(int key, void *param)
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/SSBM &");
-	 if (key == 24)// =
+	}
+	else if (key == 24)// =
 	{
 		system("killall afplay");
 		system("afplay ~/Musics/IRONMAIDEN &");
-	}*/
+	}
 	return (0);
 }
 
@@ -214,53 +216,78 @@ int		key_color(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
+	if (key == 6)// blue negative => Z
+	{
+		ft_memset(m->str, 0xff, WIDTH * HEIGHT * 4);
+	}
+		if (key == 45)// alpha => N
+	{
+		if (m->alpha + 8 != 0)
+			m->alpha += 8;
+		printf("alpha: %d\n", m->alpha);
+		redraw_relief(m);
+	}
+	if (key == 46)// alpha => M
+	{
+		if (m->alpha - 8 != 0)
+			m->alpha -= 8;
+		printf("alpha: %d\n", m->alpha);
+		redraw_relief(m);
+	}
+	if (key == 0)// random
+	{
+		m->dred = rand();
+		m->dgreen = rand();
+		m->dblue = rand();
+		redraw_relief(m);
+	}
 	if (key == 15)// red
 	{
-		m->dred = 0;
-		m->dgreen = 0xff;
-		m->dblue = 0xff;
+		m->dred = 0xff;
+		m->dgreen = 0;
+		m->dblue = 0;
 		redraw_relief(m);
 	}
 	if (key == 17)// green
 	{
-		m->dgreen = 0;
-		m->dred = 0xff;
-		m->dblue = 0xff;
+		m->dgreen = 0xff;
+		m->dred = 0;
+		m->dblue = 0;
 		redraw_relief(m);
 	}
 	if (key == 16)// blue
 	{
-		m->dblue = 0;
-		m->dgreen = 0xff;
-		m->dred = 0xff;
+		m->dblue = 0xff;
+		m->dgreen = 0;
+		m->dred = 0;
 		redraw_relief(m);
 	}
 	if (key == 32)// orange
 	{
-		m->dred = 0;
-		m->dgreen = 100;
-		m->dblue = 0xff;
+		m->dred = 0xff;
+		m->dgreen = 0x9b;
+		m->dblue = 0;
 		redraw_relief(m);
 	}
 	if (key == 34)// purple
 	{
-		m->dred = 25;
-		m->dgreen = 0xff;
-		m->dblue = 0;
+		m->dred = 0xe6;
+		m->dgreen = 0;
+		m->dblue = 0xff;
 		redraw_relief(m);
 	}
 	if (key == 31)// yellow
 	{
-		m->dred = 0;
-		m->dgreen = 15;
-		m->dblue = 0xff;
+		m->dred = 0xff;
+		m->dgreen = 0xf0;
+		m->dblue = 0;
 		redraw_relief(m);
 	}
-	if (key == 14)// yellow
+	if (key == 14)// white
 	{
-		m->dred = 0;
-		m->dgreen = 0;
-		m->dblue = 0;
+		m->dred = 0xff;
+		m->dgreen = 0xff;
+		m->dblue = 0xff;
 		redraw_relief(m);
 	}
 	return (0);
@@ -273,7 +300,8 @@ int		key(int key, void *param)
 	m = (t_m*)param;
 	if (key == 123 || key == 124 || key == 125 || key == 126 || key == 71)
 		key_move(key, param);
-	else if (key == 69 || key == 78 || key == 53 || key == 256 || key == 88 || key == 85)
+	else if (key == 69 || key == 78 || key == 53 || key == 256 || key == 88 ||
+			key == 85)
 		key_zoom(key, param);
 	else if (key == 33 || key == 35)
 		key_clean(key, param);
@@ -285,7 +313,7 @@ int		key(int key, void *param)
 			key == 27 || key == 24)
 		key_sound(key, param);
 	else if (key == 15 || key == 17 || key == 31 || key == 34 || key == 32 ||
-			key == 16)
+			 key == 16 || key == 14 || key == 0 || key == 45 || key == 46)
 		key_color(key, param);
 	ft_putnbr(key);
 	ft_putchar('|');
@@ -299,9 +327,10 @@ void	trace1(t_m m)
 	{
 		if (m.x1 > 0 && m.x1 < WIDTH && m.y1 < HEIGHT && m.y1 > 0)
 		{
-			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue - m.dblue;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green - m.dgreen;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red - m.dred;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue + m.dblue;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green + m.dgreen;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red + m.dred;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 3] = m.alpha;
 		}
 		m.x1 = m.x1 > m.x2 ? (m.x1 - 1) : (m.x1 + 1);
 		m.ex -= m.dy;
@@ -320,9 +349,10 @@ void	trace2(t_m m)
 	{
 		if (m.y1 < HEIGHT && m.y1 > 0 && m.x1 < WIDTH && m.x1 > 0)
 		{
-			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue - m.dblue;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green - m.dgreen;
-			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red - m.dred;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4] = m.blue + m.dblue;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 1] = m.green + m.dgreen;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 2] = m.red + m.dred;
+			m.str[(m.x1 + m.y1 * WIDTH) * 4 + 3] = m.alpha;
 		}
 		m.y1 = m.y1 > m.y2 ? (m.y1 - 1) : (m.y1 + 1);
 		m.ey -= m.dx;
@@ -372,12 +402,13 @@ int		main(int ac, char **av)
 	m.savegap = m.initgap;
 	m.relief = 1;
 	m.tab = NULL;
-	m.red = 0xff;
-	m.green = 0xff;
-	m.blue = 0xff;
-	m.dred = 0;
-	m.dgreen = 0;
-	m.dblue = 0;
+	m.red = 0;
+	m.green = 0;
+	m.blue = 0;
+	m.alpha = 0;
+	m.dred = 0xff;
+	m.dgreen = 0xff;
+	m.dblue = 0xff;
 	m.xtheta = 0;
 	m.ytheta = 0;
 	m.ztheta = 0;
@@ -410,6 +441,7 @@ int		main(int ac, char **av)
 	m.array = fill(fd, m);
 //	printf("\t49\n");
 	parallele(&m);
+//int	mlx_string_put(m.ptr, m.win, int x, int y, int color, char *stringi);
 //	printf("\t55\n");
 //	mlx_expose_hook(m.ptr, paralelle, &m);
 //	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);

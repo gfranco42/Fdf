@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/17 13:57:31 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/12/18 13:31:40 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "macros.h"
 # include <math.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 2560
+# define HEIGHT 1440
 # define MAX_Z 1000
 # define MIN_Z -1000
 
@@ -39,6 +39,7 @@ typedef struct		s_m
 	char	blue;
 	char	green;
 	char	red;
+	char	alpha;
 	char	dblue;
 	char	dgreen;
 	char	dred;
