@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/18 12:33:22 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/02 16:06:43 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,35 @@ void	hori_value(t_m *m)
 	m->y2 = m->tab[m->j][1][m->i + 1];
 }
 
+void	string_to_window(t_m *m)
+{
+	mlx_string_put(m->ptr, m->win, 40, 20, 0x2FFFE9, " * * * MANIPULATE * * *");
+	mlx_string_put(m->ptr, m->win, 40, 50, 0x13FFE9, "*  Rot  Z :     7 & 8   *");
+	mlx_string_put(m->ptr, m->win, 40, 70, 0x13EBE9, "*  Rot  Y :     4 & 5   *");
+	mlx_string_put(m->ptr, m->win, 40, 90, 0x13D7E9, "*  Rot  X :     1 & 2   *");
+	mlx_string_put(m->ptr, m->win, 40, 110, 0x13C3E9, "*  Relief :     3 & 6   *");
+	mlx_string_put(m->ptr, m->win, 40, 150, 0x139BE9, "*  Zoom :       + & -   *");
+	mlx_string_put(m->ptr, m->win, 40, 130, 0x13AFE9, "*  Move :       Arrows  *");
+	mlx_string_put(m->ptr, m->win, 40, 170, 0x1387E9, "*  Clean :      clear   *");
+	mlx_string_put(m->ptr, m->win, 40, 190, 0x1373E9, "*  Parallele :    P     *");
+	mlx_string_put(m->ptr, m->win, 40, 210, 0x1373E9, "*  Iso :          [     *");
+	mlx_string_put(m->ptr, m->win, 40, 230, 0x1373E9, "* * * * * * * * * * * * *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 20, 0xFFFFFF, " * * * COLOR * * *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 50, 0xFFFFFF, "* WHITE :    E    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 70, 0xFF0000, "* RED :      R    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 90, 0xFF00, "* GREEN :    T    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 110, 0xFF, "* BLUE :     Y    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 150, 0xFF9B00, "* ORANGE :   U    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 130, 0xE600FF, "* PINK :     I    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 170, 0xFFF000, "* YELLOW :   O    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 190, 0x999999, "* ALPHA :  N & M  *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 210, rand(), "* RANDOM :   A    *");
+	mlx_string_put(m->ptr, m->win, WIDTH - 290, 230, 0xFFFFFF, "* * * * * * * * * *");
+}
+
 void	draw_rot(t_m m)
 {
-//	int		i = 0;
-//	int		j = 0;
 	m.tab = fill_tab(m);
-
 	while (m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		if (m.j != 0)

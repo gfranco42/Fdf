@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:23:34 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/18 13:23:17 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/02 14:43:20 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	redraw_relief(t_m *m)
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }
 
 void	redraw_move(t_m *m, float a, float b)
@@ -36,6 +37,7 @@ void	redraw_move(t_m *m, float a, float b)
 	m->yinit += b;
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }
 
 void	redraw_zoom_in(t_m *m)
@@ -47,6 +49,7 @@ void	redraw_zoom_in(t_m *m)
 	m->savegap = m->gap;
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }
 
 void	redraw_zoom_out(t_m *m)
@@ -58,6 +61,7 @@ void	redraw_zoom_out(t_m *m)
 	m->savegap = m->gap;
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }
 
 void	iso(t_m *m)
@@ -70,6 +74,7 @@ void	iso(t_m *m)
 	m->yinit = HEIGHT / 4;
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }
 
 void	parallele(t_m *m)
@@ -90,6 +95,7 @@ void	parallele(t_m *m)
 	draw_rot(*m);
 //	printf("\t53\n");
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 //	printf("\t54\n");
 }
 
@@ -103,4 +109,5 @@ void	conique(t_m *m)
 	m->yinit = HEIGHT / 2 - ((m->line - 1) * m->gap) / 2;
 	draw_rot(*m);
 	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	string_to_window(m);
 }

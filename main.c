@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2018/12/18 14:04:55 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/02 15:28:40 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		key_rotate(int key, void *param)
 		m->xtheta += 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	else if (key == 83)
 	{
@@ -107,6 +108,7 @@ int		key_rotate(int key, void *param)
 		m->xtheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	else if (key == 87)
 	{
@@ -115,6 +117,7 @@ int		key_rotate(int key, void *param)
 		m->ytheta += 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	else if (key == 86)
 	{
@@ -123,6 +126,7 @@ int		key_rotate(int key, void *param)
 		m->ytheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	else if (key == 91)
 	{
@@ -131,6 +135,7 @@ int		key_rotate(int key, void *param)
 		m->ztheta += 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	else if (key == 89)
 	{
@@ -139,6 +144,7 @@ int		key_rotate(int key, void *param)
 		m->ztheta -= 0.1;
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+		string_to_window(m);
 	}
 	return (0);
 }
@@ -216,21 +222,17 @@ int		key_color(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
-	if (key == 6)// blue negative => Z
+	if (key == 45)// alpha => N
 	{
-		ft_memset(m->str, 0xff, WIDTH * HEIGHT * 4);
-	}
-		if (key == 45)// alpha => N
-	{
-		if (m->alpha + 8 != 0)
-			m->alpha += 8;
+		if (m->alpha + 16 != 0)
+			m->alpha += 16;
 		printf("alpha: %d\n", m->alpha);
 		redraw_relief(m);
 	}
 	if (key == 46)// alpha => M
 	{
-		if (m->alpha - 8 != 0)
-			m->alpha -= 8;
+		if (m->alpha - 16 != 0)
+			m->alpha -= 16;
 		printf("alpha: %d\n", m->alpha);
 		redraw_relief(m);
 	}
