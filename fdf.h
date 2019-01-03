@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/02 14:42:26 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/03 17:45:03 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <math.h>
 
 # define WIDTH 2560
-# define HEIGHT 1440
+# define HEIGHT 1400
 # define MAX_Z 1000
 # define MIN_Z -1000
 

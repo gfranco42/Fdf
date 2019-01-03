@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/02 15:28:40 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/03 17:45:19 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int		key_move(int key, void *param)
 	{
 		m->relief = 1;
 		m->alpha = 0;
-		m->blue = 0xff;
-		m->green = 0xff;
-		m->red = 0xff;
+		m->dblue = 0xff;
+		m->dgreen = 0xff;
+		m->dred = 0xff;
 		parallele(m);
 	}
 	return (0);
@@ -386,6 +386,11 @@ int		main(int ac, char **av)
 	int			fd;
 
 //	printf("\t1\n");
+	if (WIDTH != 2560 || HEIGHT != 1400)
+	{
+		write(1, "ERROR: Window size must be 2560x1400 ! Change it in fdf.h\n", 58);
+		exit(0);
+	}
 	if (!(m.ptr = mlx_init()))
 	{
 //		printf("\t2\n");
