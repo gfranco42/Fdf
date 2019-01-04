@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/03 17:45:19 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/04 12:30:07 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,7 +388,7 @@ int		main(int ac, char **av)
 //	printf("\t1\n");
 	if (WIDTH != 2560 || HEIGHT != 1400)
 	{
-		write(1, "ERROR: Window size must be 2560x1400 ! Change it in fdf.h\n", 58);
+		write(1, "\033[1;37mERROR: Win. size must be 2560x1400!\n\033[0m", 35);
 		exit(0);
 	}
 	if (!(m.ptr = mlx_init()))
