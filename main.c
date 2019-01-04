@@ -6,34 +6,42 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/04 12:30:07 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/04 14:42:18 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 int		key_zoom(int key, void *param)
 {
 	t_m *m;
 
 	m = (t_m *)param;
+	printf("relief : %f\n", m->relief);
 	if (key == 53)
 	{
-		system("killall afplay");
+		if (m->k != 0)
+			system("killall afplay");
 		exit(0);
 	}
 	else if (key == 256)
-		system("killall afplay");
+	{
+		if (m->k != 0)
+		{
+			system("killall afplay");
+			m->k = 0;
+		}
+	}
 	else if (key == 69)
 	{
 		m->gap *= 1.1;
+		m->relief *= 1.1;
 		redraw_zoom_in(m);
 	}
 	else if (key == 78)
 	{
 		m->gap *= 0.9;
+		m->relief *= 0.9;
 		redraw_zoom_out(m);
 	}
 	else if (key == 88)
@@ -54,13 +62,13 @@ int		key_move(int key, void *param)
 	t_m *m;
 
 	m = (t_m *)param;
-	if (key == 123)
+	if (key == 124)
 		redraw_move(m, 20, 0);
-	else if(key == 124)
+	else if(key == 123)
 		redraw_move(m, -20, 0);
-	else if (key == 126)
-		redraw_move(m, 0, 20);
 	else if (key == 125)
+		redraw_move(m, 0, 20);
+	else if (key == 126)
 		redraw_move(m, 0, -20);
 	else if (key == 71)
 	{
@@ -79,9 +87,9 @@ int		key_clean(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
-	if (key == 33)// iso
+	if (key == 33)
 		iso(m);
-	else if (key == 35)// para
+	else if (key == 35)
 		parallele(m);
 	return (0);
 }
@@ -154,65 +162,88 @@ int		key_sound(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
-	if (key == 18)// 1
+	if (key == 18)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/ONE_PUNCH.wav &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/ONE_PUNCH.wav &");
+		m->k = 1;
 	}
-	else if (key == 19)// 2
+	else if (key == 19)
 	{
-		system("killall afplay");
-		system("afplay ~/musics/ACDC &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/ACDC &");
+		m->k = 1;
 	}
-	else if (key == 20)// 3
+	else if (key == 20)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/AVICII &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/AVICII &");
+		m->k = 1;
 	}
-	else if (key == 21)// 4
+	else if (key == 21)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/BoW &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/BoW &");
+		m->k = 1;
 	}
-	else if (key == 23)// 5
+	else if (key == 23)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/NARUTO &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/NARUTO &");
+		m->k = 1;
 	}
-	else if (key == 22)// 6
+	else if (key == 22)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/EMINEM &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/EMINEM &");
+		m->k = 1;
 	}
-	else if (key == 26)// 7
+	else if (key == 26)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/FUNKYCOPS &");
+			system("killall afplay");
+		system("afplay ./musics/FUNKYCOPS &");
+		m->k = 1;
 	}
-	else if (key == 28)// 8
+	else if (key == 28)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/BACH &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/BACH &");
+		m->k = 1;
 	}
-	else if (key == 25)// 9
+	else if (key == 25)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/ARMSTRONG &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/ARMSTRONG &");
+		m->k = 1;
 	}
-	else if (key == 29)// 0
+	else if (key == 29)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/ELECRICITY &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/ELECRICITY &");
+		m->k = 1;
 	}
-	else if (key == 27)// -
+	else if (key == 27)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/SSBM &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/SSBM &");
+		m->k = 1;
 	}
-	else if (key == 24)// =
+	else if (key == 24)
 	{
-		system("killall afplay");
-		system("afplay ~/Musics/IRONMAIDEN &");
+		if (m->k != 0)
+			system("killall afplay");
+		system("afplay ./musics/IRONMAIDEN &");
+		m->k = 1;
 	}
 	return (0);
 }
@@ -222,70 +253,68 @@ int		key_color(int key, void *param)
 	t_m	*m;
 
 	m = (t_m*)param;
-	if (key == 45)// alpha => N
+	if (key == 45)
 	{
 		if (m->alpha + 16 != 0)
 			m->alpha += 16;
-		printf("alpha: %d\n", m->alpha);
 		redraw_relief(m);
 	}
-	if (key == 46)// alpha => M
+	if (key == 46)
 	{
 		if (m->alpha - 16 != 0)
 			m->alpha -= 16;
-		printf("alpha: %d\n", m->alpha);
 		redraw_relief(m);
 	}
-	if (key == 0)// random
+	if (key == 0)
 	{
 		m->dred = rand();
 		m->dgreen = rand();
 		m->dblue = rand();
 		redraw_relief(m);
 	}
-	if (key == 15)// red
+	if (key == 15)
 	{
 		m->dred = 0xff;
 		m->dgreen = 0;
 		m->dblue = 0;
 		redraw_relief(m);
 	}
-	if (key == 17)// green
+	if (key == 17)
 	{
 		m->dgreen = 0xff;
 		m->dred = 0;
 		m->dblue = 0;
 		redraw_relief(m);
 	}
-	if (key == 16)// blue
+	if (key == 16)
 	{
 		m->dblue = 0xff;
 		m->dgreen = 0;
 		m->dred = 0;
 		redraw_relief(m);
 	}
-	if (key == 32)// orange
+	if (key == 32)
 	{
 		m->dred = 0xff;
 		m->dgreen = 0x9b;
 		m->dblue = 0;
 		redraw_relief(m);
 	}
-	if (key == 34)// purple
+	if (key == 34)
 	{
 		m->dred = 0xe6;
 		m->dgreen = 0;
 		m->dblue = 0xff;
 		redraw_relief(m);
 	}
-	if (key == 31)// yellow
+	if (key == 31)
 	{
 		m->dred = 0xff;
 		m->dgreen = 0xf0;
 		m->dblue = 0;
 		redraw_relief(m);
 	}
-	if (key == 14)// white
+	if (key == 14)
 	{
 		m->dred = 0xff;
 		m->dgreen = 0xff;
@@ -317,8 +346,6 @@ int		key(int key, void *param)
 	else if (key == 15 || key == 17 || key == 31 || key == 34 || key == 32 ||
 			 key == 16 || key == 14 || key == 0 || key == 45 || key == 46)
 		key_color(key, param);
-	ft_putnbr(key);
-	ft_putchar('|');
 	return (0);
 }
 
@@ -380,81 +407,65 @@ void	trace(t_m m)
 		trace2(m);
 }
 
+void	init_variables(t_m *m)
+{
+	m->img = mlx_new_image(m->ptr, WIDTH, HEIGHT);
+	m->str = mlx_get_data_addr(m->img, &(m->bpp), &(m->s_l), &(m->endian));
+	m->win = mlx_new_window(m->ptr, WIDTH, HEIGHT, "FDF GFRANCO");
+	m->initgap = 50;
+	m->gap = m->initgap;
+	m->savegap = m->initgap;
+	m->relief = 1;
+	m->tab = NULL;
+	m->red = 0;
+	m->green = 0;
+	m->blue = 0;
+	m->alpha = 0;
+	m->dred = 0xff;
+	m->dgreen = 0xff;
+	m->dblue = 0xff;
+	m->xtheta = 0;
+	m->ytheta = 0;
+	m->ztheta = 0;
+	m->z = 0;
+	m->i = 0;
+	m->j = 0;
+	m->k = 0;
+	m->xout = 0;
+	m->yout = 0;
+}
+
+void	fail(int i)
+{
+	if (i == 1)
+		ft_putstr("Failed to open <FILE>\n");
+	if (i == 2)
+		ft_putstr("usage: ./fdf target_file\n");
+	if (i == 3)
+		ft_putstr("ERROR: impossible to initialize mlx_ptr\n");
+	if (i == 4)
+		ft_putstr("ERROR: Window size must be 2560x1400\n");
+	exit(0);
+}
+
 int		main(int ac, char **av)
 {
 	t_m			m;
 	int			fd;
 
-//	printf("\t1\n");
-	if (WIDTH != 2560 || HEIGHT != 1400)
-	{
-		write(1, "\033[1;37mERROR: Win. size must be 2560x1400!\n\033[0m", 35);
-		exit(0);
-	}
-	if (!(m.ptr = mlx_init()))
-	{
-//		printf("\t2\n");
-		exit(0);
-	}
-//	printf("\t3\n");
-	m.img = mlx_new_image(m.ptr, WIDTH, HEIGHT);
-//	printf("\t4\n");
-	m.str = mlx_get_data_addr(m.img, &(m.bpp), &(m.s_l), &(m.endian));
-//	printf("\t5\n");
-	m.win = mlx_new_window(m.ptr, WIDTH, HEIGHT, "YOLO");
-//	printf("\t6\n");
-
-	m.initgap = 50;
-	m.gap = m.initgap;
-	m.savegap = m.initgap;
-	m.relief = 1;
-	m.tab = NULL;
-	m.red = 0;
-	m.green = 0;
-	m.blue = 0;
-	m.alpha = 0;
-	m.dred = 0xff;
-	m.dgreen = 0xff;
-	m.dblue = 0xff;
-	m.xtheta = 0;
-	m.ytheta = 0;
-	m.ztheta = 0;
-	m.z = 0;
-	m.i = 0;
-	m.j = 0;
-	m.k = 0;
-	m.xout = 0;
-	m.yout = 0;
 	if (ac != 2)
-	{
-		printf("\033[1;33mNEED FILE ! ! !\033[0m\n");
-		return (0);
-	}
-//	printf("\t7\n");
+		fail(2);
+	if (!(m.ptr = mlx_init()))
+		fail(3);
+	if (WIDTH != 2560 || HEIGHT != 1400)
+		fail(4);
+	init_variables(&m);
 	m.array = stock(av[1], &m);
-//	printf("\t38\n");
-/*	m.lencolumn = (m.column - 1) * m.gap;
-	m.lenline = (m.line - 1) * m.gap;
-	m.xinit = WIDTH / 2 - m.lencolumn / 2;
-	m.yinit = HEIGHT / 2 - m.lenline / 2;
-	m.x1 = m.xinit;
-	m.y1 = m.yinit;*/
 	if ((fd = open(av[1], O_RDONLY)) == -1)
-	{
-		ft_putstr("Failed to open <FILE>\n");
-		exit(EXIT_FAILURE);
-	}
-//	printf("\t39\n");
+		fail(1);
 	m.array = fill(fd, m);
-//	printf("\t49\n");
 	parallele(&m);
-//int	mlx_string_put(m.ptr, m.win, int x, int y, int color, char *stringi);
-//	printf("\t55\n");
-//	mlx_expose_hook(m.ptr, paralelle, &m);
-//	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
 	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
-//	printf("56");
 	mlx_loop(m.ptr);
-//	printf("57");
 	return (0);
 }
