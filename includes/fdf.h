@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/04 14:18:46 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/07 13:54:24 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define HEIGHT 1400
 # define MAX_Z 1000
 # define MIN_Z -1000
-
 
 typedef struct		s_m
 {
@@ -77,37 +76,31 @@ typedef struct		s_m
 	int		k;
 }					t_m;
 
-
-int			**stock(char *file, t_m *m);
-int			**fill(int fd, t_m m);
-//int			**fill2(m, int fd);
-void		string_to_window(t_m *m);
-void		trace(t_m m);
-void		draw(t_m m);
-void		draw_rot(t_m m);
-void		fail(int i);
-void		init_variable(t_m *m);
-void		init_rot(t_m *m);
-void		redraw_move(t_m *m, float a, float b);
-void		redraw_zoom_in(t_m *m);
-void		redraw_zoom_out(t_m *m);
-void		redraw_relief(t_m *m);
-void		change_relief_up(t_m *m);
-void		change_relief_down(t_m *m);
-void		zero(t_m *m);
-void		back(t_m *m);
-void		next(t_m *m);
-void		iso(t_m *m);
-void		parallele(t_m *m);
-void		conique(t_m *m);
-void		xrotate(t_m *m);
-void		yrotate(t_m *m);
-void		zrotate(t_m *m);
-void		first_x_rotate(t_m *m);
-void		first_y_rotate(t_m *m);
-void		first_z_rotate(t_m *m);
-void		x1rotate(t_m *m);
-void		y1rotate(t_m *m);
-void		z1rotate(t_m *m);
+void				back(t_m *m);
+void				draw_rot(t_m m);
+void				fail(int i);
+int					**fill(int fd, t_m m);
+int					***fill_tab(t_m m);
+void				first_rotate(t_m *m);
+void				init_rot(t_m *m);
+void				iso(t_m *m);
+int					key_clean(int kay, void *param);
+int					key_color(int kay, void *param);
+int					key_move(int kay, void *param);
+int					key_relief(int kay, void *param);
+int					key_rotate(int kay, void *param);
+int					key_sounds(int kay, void *param);
+int					key_stop(int kay, void *param);
+int					key_zoom(int kay, void *param);
+void				parallele(t_m *m);
+void				redraw(t_m *m);
+void				redraw_move(t_m *m, float a, float b);
+void				redraw_zoom_in(t_m *m);
+void				redraw_zoom_out(t_m *m);
+void				rotate(t_m *m);
+int					**stock(char *file, t_m *m);
+void				string_to_window(t_m *m);
+void				trace(t_m m);
+void				zero(t_m *m);
 
 #endif

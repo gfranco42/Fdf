@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:45:46 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/04 14:12:59 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/07 13:59:50 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		**fill(int fd, t_m m)
 		arr = NULL;
 		m.j++;
 		m.i = 0;
+		free(line);
 	}
 	return (m.array);
 }

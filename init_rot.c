@@ -6,20 +6,16 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/04 14:13:41 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/07 13:36:55 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
 
-void	first_back(t_m *m)
+void	back(t_m *m)
 {
 	m->x1 += m->xlen;
 	m->y1 += m->ylen;
-}
-
-void	back(t_m *m)
-{
 	m->xinit += m->xlen;
 	m->yinit += m->ylen;
 }
@@ -44,9 +40,6 @@ void	init_rot(t_m *m)
 	m->z = m->array[m->j][m->i] * m->relief;
 	m->z = m->z >= MAX_Z ? 1000 : m->z;
 	m->z = m->z <= MIN_Z ? -1000 : m->z;
-	first_x_rotate(m);
-	first_y_rotate(m);
-	first_z_rotate(m);
-	first_back(m);
+	first_rotate(m);
 	back(m);
 }
