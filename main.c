@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 15:48:25 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/08 17:50:14 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,18 @@ int		main(int ac, char **av)
 	if (WIDTH != 2560 || HEIGHT != 1400)
 		fail(4);
 	init_variables(&m);
-	m.array = stock(av[1], &m);
+	stock(av[1], &m);
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		fail(1);
 	m.array = fill(fd, m);
+	m.i = 0;
+	/*while (m.i < m.line)
+	{
+		free(m.array[m.i]);
+		m.i++;
+	}
+	free(m.array);*/
 	parallele(&m);
-	free(m.array);
-	free(m.tab);
-	free(m.str);
 	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
 	mlx_loop(m.ptr);
 	return (0);

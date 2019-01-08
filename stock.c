@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 13:59:47 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/08 17:04:43 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ int		**make_array(t_m *m)
 	return (array);
 }
 
-int		**stock(char *file, t_m *m)
+void		stock(char *file, t_m *m)
 {
-	int		**array;
-
 	m->line = nb_line(file);
 	m->column = nb_column(file);
-	array = make_array(m);
-	return (array);
+	m->array = make_array(m);
 }

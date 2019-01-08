@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 12:24:11 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/08 17:43:21 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	give_value(t_m *m)
 int		***fill_tab(t_m m)
 {
 	init_rot(&m);
-	m.tab = make_tab(m);
+	if (m.tab == NULL)
+		m.tab = make_tab(m);
 	m.tab[m.j][0][m.i] = m.x1;
 	m.tab[m.j][1][m.i] = m.y1;
 	m.i++;

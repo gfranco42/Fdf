@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 13:54:24 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/08 17:13:45 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void				redraw_move(t_m *m, float a, float b);
 void				redraw_zoom_in(t_m *m);
 void				redraw_zoom_out(t_m *m);
 void				rotate(t_m *m);
-int					**stock(char *file, t_m *m);
+void				stock(char *file, t_m *m);
 void				string_to_window(t_m *m);
 void				trace(t_m m);
 void				zero(t_m *m);

@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 12:42:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 13:39:39 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/08 14:54:31 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		key_color(int key, void *param)
 	m = (t_m*)param;
 	if (key == 14)
 		key_color1(key, param);
-	if (key == 45 || key == 46 || 0)
+	if (key == 45 || key == 46 || key == 0)
 		key_color2(key, param);
 	if (key == 15 || key == 17 || key == 16)
 		key_color3(key, param);
