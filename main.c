@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/08 17:50:14 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 13:33:06 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ int		key(int key, void *param)
 
 void	init_variables(t_m *m)
 {
-	m->img = mlx_new_image(m->ptr, WIDTH, HEIGHT);
-	m->str = mlx_get_data_addr(m->img, &(m->bpp), &(m->s_l), &(m->endian));
 	m->win = mlx_new_window(m->ptr, WIDTH, HEIGHT, "FDF GFRANCO");
 	m->initgap = 50;
 	m->gap = m->initgap;
 	m->savegap = m->initgap;
 	m->relief = 1;
 	m->tab = NULL;
+	m->array = NULL;
 	m->red = 0;
 	m->green = 0;
 	m->blue = 0;
@@ -84,26 +83,15 @@ void	fail(int i)
 int		main(int ac, char **av)
 {
 	t_m			m;
-	int			fd;
 
 	if (ac != 2)
 		fail(2);
+	m.av = av[1];
 	if (!(m.ptr = mlx_init()))
 		fail(3);
 	if (WIDTH != 2560 || HEIGHT != 1400)
 		fail(4);
 	init_variables(&m);
-	stock(av[1], &m);
-	if ((fd = open(av[1], O_RDONLY)) == -1)
-		fail(1);
-	m.array = fill(fd, m);
-	m.i = 0;
-	/*while (m.i < m.line)
-	{
-		free(m.array[m.i]);
-		m.i++;
-	}
-	free(m.array);*/
 	parallele(&m);
 	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
 	mlx_loop(m.ptr);

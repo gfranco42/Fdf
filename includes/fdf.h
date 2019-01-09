@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/08 17:13:45 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 11:33:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_m
 	void	*img;
 	int		*win;
 	char	*str;
+	char	*av;
 	int		**array;
 	int		***tab;
 	char	blue;

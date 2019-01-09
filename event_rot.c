@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 12:33:28 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 13:31:48 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 13:18:32 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		key_rotate_x(int key, void *param)
 {
 	t_m	*m;
+	int	fd;
 
 	m = (t_m *)param;
 	if (key == 84)
@@ -22,6 +23,10 @@ int		key_rotate_x(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta += 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);
@@ -31,6 +36,10 @@ int		key_rotate_x(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->xtheta -= 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);
@@ -41,6 +50,7 @@ int		key_rotate_x(int key, void *param)
 int		key_rotate_y(int key, void *param)
 {
 	t_m	*m;
+	int		fd;
 
 	m = (t_m *)param;
 	if (key == 87)
@@ -48,6 +58,10 @@ int		key_rotate_y(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta += 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);
@@ -57,6 +71,10 @@ int		key_rotate_y(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ytheta -= 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);
@@ -67,6 +85,7 @@ int		key_rotate_y(int key, void *param)
 int		key_rotate_z(int key, void *param)
 {
 	t_m	*m;
+	int		fd;
 
 	m = (t_m *)param;
 	if (key == 91)
@@ -74,6 +93,10 @@ int		key_rotate_z(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta += 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);
@@ -83,6 +106,10 @@ int		key_rotate_z(int key, void *param)
 		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		m->ztheta -= 0.1;
+		stock(m->av, m);
+		if ((fd = open(m->av, O_RDONLY)) == -1)
+			fail(1);
+		m->array = fill(fd, *m);
 		draw_rot(*m);
 		mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
 		string_to_window(m);

@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 12:07:16 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/08 15:57:53 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 13:21:35 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 void	iso(t_m *m)
 {
-	ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	int		fd;
+
+	mlx_destroy_image(m->ptr, m->img);
+	m->img = mlx_new_image(m->ptr, WIDTH, HEIGHT);
+	m->str = mlx_get_data_addr(m->img, &(m->bpp), &(m->s_l), &(m->endian));
+	stock(m->av, m);
+	if ((fd = open(m->av, O_RDONLY)) == -1)
+		fail(1);
+	m->array = fill(fd, *m);
 	m->gap = m->initgap;
 	while (m->gap * m->line > HEIGHT - 200 || m->gap * m->column > WIDTH - 200)
 		m->gap *= 0.9;
@@ -33,9 +40,14 @@ void	iso(t_m *m)
 
 void	parallele(t_m *m)
 {
-	if (m->str)
-		ft_memset(m->str, 0, WIDTH * HEIGHT * 4);
-	mlx_put_image_to_window(m->ptr, m->win, m->img, 0, 0);
+	int		fd;
+
+	m->img = mlx_new_image(m->ptr, WIDTH, HEIGHT);
+	m->str = mlx_get_data_addr(m->img, &(m->bpp), &(m->s_l), &(m->endian));
+	stock(m->av, m);
+	if ((fd = open(m->av, O_RDONLY)) == -1)
+		fail(1);
+	m->array = fill(fd, *m);
 	m->gap = m->initgap;
 	while (m->gap * m->line > HEIGHT - 200 || m->gap * m->column > WIDTH - 200)
 		m->gap *= 0.9;

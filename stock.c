@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/08 17:04:43 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 13:25:32 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int		nb_column(char *file)
 		i++;
 	}
 	free(line);
-	while ((g = get_next_line(fd, &line)) == 1)
-		free(line);
 	close(fd);
 	return (nbr);
 }

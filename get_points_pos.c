@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/08 17:43:21 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/09 13:57:25 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int		***fill_tab(t_m m)
 		m.tab = make_tab(m);
 	m.tab[m.j][0][m.i] = m.x1;
 	m.tab[m.j][1][m.i] = m.y1;
-	m.i++;
-	while (m.i < m.column - 1 || m.j < m.line - 1)
+	while (++m.i < m.column - 1 || m.j < m.line - 1)
 	{
 		next_y(&m);
 		m.tab[m.j][0][m.i] = m.x2;
@@ -75,7 +74,6 @@ int		***fill_tab(t_m m)
 			m.tab[m.j][0][m.i] = m.x2;
 			m.tab[m.j][1][m.i] = m.y2;
 		}
-		m.i++;
 	}
 	if (m.i == m.column - 1 && m.j == m.line - 1)
 	{
