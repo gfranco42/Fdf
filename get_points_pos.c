@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/09 13:57:25 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/10 17:56:45 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	next_y(t_m *m)
 	m->x2 = m->xout + m->i * m->gap;
 	m->y2 = m->yout + m->j * m->gap;
 	m->z = m->array[m->j][m->i] * m->relief;
-	m->z = m->z >= MAX_Z ? 1000 : m->z;
-	m->z = m->z <= MIN_Z ? -1000 : m->z;
+	m->z = m->z >= MAX_Z ? MAX_Z : m->z;
+	m->z = m->z <= MIN_Z ? MIN_Z : m->z;
 	rotate(m);
 	m->x2 += m->xlen;
 	m->y2 += m->ylen;
@@ -47,8 +47,8 @@ void	give_value(t_m *m)
 	m->i = 0;
 	m->j++;
 	m->z = m->array[m->j][m->i] * m->relief;
-	m->z = m->z >= MAX_Z ? 1000 : m->z;
-	m->z = m->z <= MIN_Z ? -1000 : m->z;
+	m->z = m->z >= MAX_Z ? MAX_Z : m->z;
+	m->z = m->z <= MIN_Z ? MIN_Z : m->z;
 	m->x2 = m->xout;
 	m->y2 = (m->yout + m->j * m->gap);
 	rotate(m);

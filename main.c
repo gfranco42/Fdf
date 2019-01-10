@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/09 13:33:06 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/10 18:04:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		key(int key, void *param)
 		key_move(key, param);
 	else if (key == 33 || key == 35 || key == 71)
 		key_clean(key, param);
-	else if (key == 88 || key == 85)
+	else if ((key == 88 && m->a == 1) || (key == 85 && m->b == 1))
 		key_relief(key, param);
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
 			key == 91 || key == 82)
@@ -47,8 +47,11 @@ void	init_variables(t_m *m)
 	m->gap = m->initgap;
 	m->savegap = m->initgap;
 	m->relief = 1;
+	m->rel_v = 0.5;
 	m->tab = NULL;
 	m->array = NULL;
+	m->a = 1;
+	m->b = 1;
 	m->red = 0;
 	m->green = 0;
 	m->blue = 0;
@@ -70,13 +73,15 @@ void	init_variables(t_m *m)
 void	fail(int i)
 {
 	if (i == 1)
-		ft_putstr("Failed to open <FILE>\n");
+		ft_putstr("Failed to open file\n");
 	if (i == 2)
 		ft_putstr("usage: ./fdf target_file\n");
 	if (i == 3)
 		ft_putstr("ERROR: impossible to initialize mlx_ptr\n");
 	if (i == 4)
-		ft_putstr("ERROR: Window size must be 2560x1400\n");
+		ft_putstr("ERROR: window size must be 2560x1400\n");
+	if (i == 5)
+		ft_putstr("ERROR: incorrect map\n");
 	exit(0);
 }
 

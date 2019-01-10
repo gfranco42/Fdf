@@ -6,11 +6,19 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/09 13:25:32 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/10 17:57:06 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/fdf.h"
+
+void	finish_fd(int fd)
+{
+	char	*line;
+
+	while (get_next_line(fd, &line) > 0)
+		free(line);
+}
 
 int		nb_column(char *file)
 {
@@ -35,6 +43,7 @@ int		nb_column(char *file)
 		i++;
 	}
 	free(line);
+	finish_fd(fd);
 	close(fd);
 	return (nbr);
 }
@@ -76,7 +85,7 @@ int		**make_array(t_m *m)
 	return (array);
 }
 
-void		stock(char *file, t_m *m)
+void	stock(char *file, t_m *m)
 {
 	m->line = nb_line(file);
 	m->column = nb_column(file);

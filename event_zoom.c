@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 12:27:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/07 13:39:53 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/10 17:23:36 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int		key_relief(int key, void *param)
 	t_m	*m;
 
 	m = (t_m *)param;
-	if (key == 88)
+	if (key == 88 && m->a == 1)
 	{
-		m->relief += 0.3;
+		m->relief += 0.5;
 		redraw(m);
 	}
-	else if (key == 85)
+	else if (key == 85 && m->b == 1)
 	{
-		m->relief -= 0.3;
+		m->relief -= 0.5;
 		redraw(m);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/09 11:33:16 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/10 17:57:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,27 @@ typedef struct		s_m
 	int		dy;
 	int		line;
 	int		column;
-	double	relief;
-	double	xinit;
-	double	yinit;
-	double	xout;
-	double	yout;
-	double	xlen;
-	double	ylen;
-	double	initgap;
-	double	savegap;
-	double	gap;
-	double	xtheta;
-	double	ytheta;
-	double	ztheta;
+	int		a;
+	int		b;
+	float	rel_v;
+	float	relief;
+	float	xinit;
+	float	yinit;
+	float	xout;
+	float	yout;
+	float	xlen;
+	float	ylen;
+	float	initgap;
+	float	savegap;
+	float	gap;
+	float	xtheta;
+	float	ytheta;
+	float	ztheta;
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
-	double	z;
+	float	z;
 	int		i;
 	int		j;
 	int		k;
@@ -85,11 +88,14 @@ int					***fill_tab(t_m m);
 void				first_rotate(t_m *m);
 void				init_rot(t_m *m);
 void				iso(t_m *m);
+void				check_rel(t_m *m);
 int					key_clean(int kay, void *param);
 int					key_color(int kay, void *param);
 int					key_move(int kay, void *param);
 int					key_relief(int kay, void *param);
 int					key_rotate(int kay, void *param);
+int					key_rotate_z1(int key, void *param);
+int					key_rotate_z2(int key, void *param);
 int					key_sounds(int kay, void *param);
 int					key_stop(int kay, void *param);
 int					key_zoom(int kay, void *param);
