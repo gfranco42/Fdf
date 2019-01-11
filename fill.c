@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/13 11:45:46 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/10 18:13:12 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/11 16:44:47 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		**fill(int fd, t_m m)
 			fail(5);
 		while (arr[m.i])
 		{
-			m.array[m.j][m.i] = ft_atoi(arr[m.i]);
+			m.array[m.j][m.i] = ft_atoi(arr[m.i]) > MAX_Z ? MAX_Z : ft_atoi(arr[m.i]);
+			m.array[m.j][m.i] = ft_atoi(arr[m.i]) < MIN_Z ? MIN_Z : ft_atoi(arr[m.i]);
 			free(arr[m.i]);
 			m.i++;
 		}

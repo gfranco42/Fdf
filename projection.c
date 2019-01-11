@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/07 12:07:16 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/10 18:08:49 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/11 14:57:18 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	iso(t_m *m)
 	if ((fd = open(m->av, O_RDONLY)) == -1)
 		fail(1);
 	m->array = fill(fd, *m);
-	check_rel(m);
 	m->i = 0;
 	m->j = 0;
 	m->gap = m->initgap;
@@ -51,7 +50,6 @@ void	parallele(t_m *m)
 	if ((fd = open(m->av, O_RDONLY)) == -1)
 		fail(1);
 	m->array = fill(fd, *m);
-	check_rel(m);
 	m->i = 0;
 	m->j = 0;
 	m->gap = m->initgap;

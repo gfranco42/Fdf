@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/10 17:57:16 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/11 14:55:55 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_m
 	int		column;
 	int		a;
 	int		b;
+	float	coef;
 	float	rel_v;
 	float	relief;
 	float	xinit;
@@ -88,7 +89,7 @@ int					***fill_tab(t_m m);
 void				first_rotate(t_m *m);
 void				init_rot(t_m *m);
 void				iso(t_m *m);
-void				check_rel(t_m *m);
+int					check_rel(t_m *m, int key);
 int					key_clean(int kay, void *param);
 int					key_color(int kay, void *param);
 int					key_move(int kay, void *param);

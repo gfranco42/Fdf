@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 18:30:55 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/10 16:55:27 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/11 16:40:46 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	init_rot(t_m *m)
 	m->j = 0;
 	zero(m);
 	m->z = m->array[m->j][m->i] * m->relief;
-	m->z = m->z >= MAX_Z ? 1000 : m->z;
-	m->z = m->z <= MIN_Z ? -1000 : m->z;
+	//m->z = m->z >= MAX_Z ? 1000 : m->z;
+	//m->z = m->z <= MIN_Z ? -1000 : m->z;
 	first_rotate(m);
 	back(m);
 }

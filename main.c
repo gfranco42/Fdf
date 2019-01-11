@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/10 18:04:16 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/11 16:37:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int		key(int key, void *param)
 		key_move(key, param);
 	else if (key == 33 || key == 35 || key == 71)
 		key_clean(key, param);
-	else if ((key == 88 && m->a == 1) || (key == 85 && m->b == 1))
-		key_relief(key, param);
 	else if (key == 83 || key == 84 || key == 86 || key == 87 || key == 89 ||
 			key == 91 || key == 82)
 		key_rotate(key, param);
@@ -52,6 +50,7 @@ void	init_variables(t_m *m)
 	m->array = NULL;
 	m->a = 1;
 	m->b = 1;
+	m->coef = 1;
 	m->red = 0;
 	m->green = 0;
 	m->blue = 0;
