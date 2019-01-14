@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/11 14:55:55 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/14 16:29:13 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # include <stdio.h>
-# include "../srcs/Libft/libft.h"
+# include "../libft/libft.h"
 # include "macros.h"
 # include <math.h>
 
