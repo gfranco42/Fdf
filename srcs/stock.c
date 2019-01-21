@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:08:36 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/14 16:28:45 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/01/21 12:38:41 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		nb_line(char *file)
 	if (g == 0)
 		fail(6);
 	nbr++;
+	free(line);
 	while (get_next_line(fd, &line) > 0)
 	{
 		nbr++;
