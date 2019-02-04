@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 14:25:54 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/14 16:28:30 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/02/04 11:22:03 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int		key(int key, void *param)
 
 void	init_variables(t_m *m)
 {
-	m->win = mlx_new_window(m->ptr, WIDTH, HEIGHT, "FDF GFRANCO");
 	m->initgap = 50;
 	m->gap = m->initgap;
 	m->savegap = m->initgap;
@@ -99,7 +98,13 @@ int		main(int ac, char **av)
 	if (WIDTH != 2560 || HEIGHT != 1400)
 		fail(4);
 	init_variables(&m);
-	parallele(&m);
+	first_draw(&m);
+	m.win = mlx_new_window(m.ptr, WIDTH, HEIGHT, "FDF GFRANCO");
+	m.img = mlx_new_image(m.ptr, WIDTH, HEIGHT);
+	m.str = mlx_get_data_addr(m.img, &(m.bpp), &(m.s_l), &(m.endian));
+	draw_rot(m);
+	mlx_put_image_to_window(m.ptr, m.win, m.img, 0, 0);
+	string_to_window(&m);
 	mlx_hook(m.win, KEYPRESS, KEYPRESSMASK, key, &m);
 	mlx_loop(m.ptr);
 	return (0);

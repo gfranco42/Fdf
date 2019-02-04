@@ -6,7 +6,7 @@
 /*   By: gfranco <gfranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/02 19:46:34 by gfranco           #+#    #+#             */
-/*   Updated: 2019/01/14 16:29:13 by gfranco          ###   ########.fr       */
+/*   Updated: 2019/02/04 10:38:36 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void				draw_rot(t_m m);
 void				fail(int i);
 int					**fill(int fd, t_m m);
 int					***fill_tab(t_m m);
+int					***fill_tab_first(t_m m);
+void				first_draw(t_m *m);
 void				first_rotate(t_m *m);
 void				init_rot(t_m *m);
 void				iso(t_m *m);
